@@ -180,9 +180,12 @@ swe_obs2008 = pd.DataFrame (obs_swe['swe_mm']['2007-12-03':'2008-06-08'], column
 #date_swe_day_dt = pd.DatetimeIndex(date_swe_day)
 #date_swe_day_dt.strftime('%Y-%m-%d')
 #obs_swe.set_index(pd.DatetimeIndex(date_swe_day_dt),inplace=True)  
-obs_swe_ind = np.array([749,1441,2209,2905,3721,3889,4057,4225,4393,4777,4897,5113,5281,5449,
-                        5617,5785,5953,10273,10969,11689,12457,12967,13153,13465,13657,13801,13993,14137,
-                        14306,14473,14641,14785])
+#obs_swe_ind = np.array([749,1441,2209,2905,3721,3889,4057,4225,4393,4777,4897,5113,5281,5449,
+#                        5617,5785,5953,10273,10969,11689,12457,12967,13153,13465,13657,13801,13993,14137,
+#                        14306,14473,14641,14785])
+obs_swe_ind = np.array([760,1455,2220,2920,3735,3900,4070,4240,4405,4790,4910,5125,5295,5460,
+                        5630,5799,5965,10290,10980,11700,12470,12980,13165,13488,13670,13815,
+                        14010,14150,14320,14485,14655,14800])
 obs_swe.set_index(obs_swe_ind,inplace=True)
 #%% Snow depth observation data
 with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/testVegFunctionsImpact/snowDepth_2006_2008.csv") as safd1:
@@ -224,31 +227,30 @@ av_sd_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'scalarSnowDepth',h
 av_swe_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'scalarSWE',hru_names_df[0],hruidxID)
 
 #%% ploting annual swe curves 
-#DateSa21 = date(av_all[0],"%Y-%m-%d")
-#DateSa22 = date(av_all[1],"%Y-%m-%d")
-#date_sa = np.append(DateSa21,DateSa22)
+DateSa21 = date(av_all[0],"%Y-%m-%d")
+DateSa22 = date(av_all[1],"%Y-%m-%d")
+date_sa = np.append(DateSa21,DateSa22)
 
-#av_swe_df.set_index(date_sa,inplace=True)
-
-#sax = np.arange(0,np.size(date_sa))
-#sa_xticks = date_sa
-plt.subplots(1,1, figsize=(40,30))#safig, saax = 
-
-#plt.xticks(sax, sa_xticks[::2000], rotation=25, fontsize=20)# 
-#saax.xaxis.set_major_locator(ticker.AutoLocator())
+safig, saax = plt.subplots(1,1, figsize=(40,30))#
 
 for hru in range (1,len(hru_names_df[0]),2):
     plt.plot(av_swe_df[hru_names_df[0][hru]], linewidth=2.5)#sbx, swe_obs2006, 'k--', )#, label='wwe', color='maroon') param_nam_list[q] color_list[q]
-#plt.plot(av_swe_df['102swr2'], linewidth=2.5)
+
 plt.plot(obs_swe, 'ok', markersize=10)
 
 plt.title('SWE', position=(0.04, 0.88), ha='left', fontsize=40)
+
+sax = np.arange(0,np.size(date_sa))
+sa_xticks = date_sa
+plt.xticks(sax, sa_xticks[::2000], rotation=25, fontsize=40)# 
+saax.xaxis.set_major_locator(ticker.AutoLocator())
+
 plt.yticks(fontsize=40)
 plt.xlabel('Time 2006-2008', fontsize=40)
 plt.ylabel('SWE(mm)', fontsize=40)
 plt.legend(fontsize = 40, loc = 'upper center')
 
-plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/testVegFunctionsImpact/vegTest_output/swe_vegtest_odd.png')
+plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/testVegFunctionsImpact/vegTest_output/swe_vegtest_odd2.png')
 #%% day of snow disappearance (based on snowdepth)-final output
 #av_sd_df5000 = av_sd_df[:][5000:8737]
 #
