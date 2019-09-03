@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import itertools
 import csv
 #%% hru names
-hruidxID = list(np.arange(101,103))
+hruidxID = list(np.arange(101,137))
 hru_num = np.size(hruidxID)
 
 #%% #Swamp Angel forcing data
@@ -77,7 +77,7 @@ for dimname in sbFD.dimensions.keys():
 
 atemp = sbFD.variables['airtemp'][:]
 #%% make new nc file
-new_fc_sa = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/calib_current/SwampAngel_forcingD.nc",'w',format='NETCDF3_CLASSIC')
+new_fc_sa = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa1/SwampAngel_forcingD.nc",'w',format='NETCDF3_CLASSIC')
 # define dimensions 
 hru = new_fc_sa.createDimension('hru', hru_num)
 time = new_fc_sa.createDimension('time', None)
@@ -191,7 +191,7 @@ test = new_fc_sa.variables['pptrate'][:]
 # close the file to write it
 new_fc_sa.close()
 #%%
-testfd = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/calib_current/SwampAngel_forcingD.nc")
+testfd = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa1/SwampAngel_forcingD.nc")
 print testfd.variables['airtemp'][:]
 # read out variables, data types, and dimensions of original forcing netcdf
 for varname in testfd.variables.keys():
