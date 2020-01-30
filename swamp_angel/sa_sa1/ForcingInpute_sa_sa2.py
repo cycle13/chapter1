@@ -7,14 +7,13 @@ import matplotlib.pyplot as plt
 import itertools
 import csv
 #%% hru names
-hruidxID = list(np.arange(10000,12180))
+hruidxID = list(np.arange(10000,11065))  #12180
 hru_num = np.size(hruidxID)
 
 #%% #Swamp Angel forcing data
 #swampangel_forcing = open('swamp_angel_forcingdata2_corrected.csv', 'rb')
 #sa_forcing = csv.reader(swampangel_forcing)#, delimiter=',')
-
-with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/testVegFunctionsImpact/swamp_angel_forcingdata2_corrected_precipCalib_final.csv") as safd:
+with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/swamp_angel_forcingdata2_corrected_precipCalib_final_L.csv") as safd:
     reader = csv.reader(safd)
     data_forcing = [r for r in reader]
 data_forcing2 = data_forcing[1:]

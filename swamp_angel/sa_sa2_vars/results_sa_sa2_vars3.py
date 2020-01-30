@@ -52,6 +52,30 @@ def readVariablefromMultipleNcfilesDatasetasDF(av_all,variable,hruname_df,hruidx
     
     return variable_df
 
+def readVariablefromMultipleNcfilesDatasetasDF40neYear(av_all,variable,hruname_df,hruidxID,out_names):
+    
+    variableList = []
+    for ds in range(len(hruname_df)/len(hruidxID)): # 22/2
+        variableNameList = []
+        variableNameList_year1 = av_all[ds][variable][:]
+        variableList.append(variableNameList_year1)
+    
+    list_col = []
+    for i in range (len(out_names)):
+        for j in range (len(hruidxID)):
+            column = variableList[i][:,j]
+            list_col.append(column)
+    
+    variable_arr = np.array(list_col).T
+    
+    variable_df = pd.DataFrame(variable_arr, columns = hruname_df[0])
+    counter = pd.DataFrame(np.arange(0,np.size(variable_df[hruname_df[0][0]])),columns=['counter'])    
+    counter.set_index(variable_df.index,inplace=True)
+    variable_df = pd.concat([counter, variable_df], axis=1)
+    
+    return variable_df
+
+
 def readVariablefromMultipleNcfilesDatasetasDF4AYear(av_all,variable,hruname_df,hruidxID,out_names):
 
     variableList = []
@@ -266,10 +290,10 @@ snowdepth_obs_df2 = pd.DataFrame(sa_sd_obs, columns = ['observed_snowdepth'])
 indx_sd = np.arange(0,16056,24)
 snowdepth_obs_df2.set_index(indx_sd,inplace=True)
 #%% defining hrus_name
-hruidxID = list(np.arange(10000,11150))    
+hruidxID = list(np.arange(10000,10954))    
 hru_num = np.size(hruidxID)
-years = ['2007','2008']
-out_names = ["lth","ltc","ltp","ljc","ljp","sjc","sjp","stc"]
+years = ['2007','2008']#
+out_names = ["ljh"]#,,"ljp","ljc","ltc","lth","ltp","sth","stc","sjc","sjp"
                        
 paramModel = (np.size(out_names))*(hru_num)
 hru_names =[]
@@ -285,8 +309,11 @@ av_all = readAllNcfilesAsDataset(av_ncfiles)
 #DateSa2007 = date(av_all[0],"%Y-%m-%d %H:%M")
 #DateSa2008 = date(av_all[1],"%Y-%m-%d %H:%M")
 
+#av_swe_df = readVariablefromMultipleNcfilesDatasetasDF40neYear(av_all,'scalarSWE',hru_names_df,hruidxID,out_names)
+
 av_sd_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'scalarSnowDepth',hru_names_df,hruidxID,out_names)
 av_swe_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'scalarSWE',hru_names_df,hruidxID,out_names)
+
 
 #%% ploting annual swe curves 
 
@@ -296,67 +323,73 @@ date_sa = np.append(DateSa21,DateSa22)
 #av_swe_df.index = date_sa
 safig, saax = plt.subplots(1,1, figsize=(30,20))#
 
-for hru in range (864,876):#,2len(hru_names_df[0])
-    print hru_names_df[0][hru]
-    plt.plot(av_swe_df[hru_names_df[0][hru]], linewidth=4)
-#for hru in range (1344,1356):#,2len(hru_names_df[0])
-#    print hru_names_df[0][hru]
-#    plt.plot(av_swe_df[hru_names_df[0][hru]], linewidth=4)
-
-for hru in range (2):#len(hru_names_df[0]),
+for hru in range (len(hru_names_df[0])):#len(hru_names_df[0]),
     #print hru_names_df[0][hru]
     plt.plot(av_swe_df[hru_names_df[0][hru]], linewidth=4)
-
-#saax.plot(av_swe_df[hru_names_df[0][0]].index, av_swe_df[hru_names_df[0][0]], linewidth=4)
-#saax.plot(av_swe_df[hru_names_df[0][0]].index, av_swe_df[hru_names_df[0][1]], linewidth=4, color = 'green')
-#saax.plot(av_swe_df[hru_names_df[0][0]].index, av_swe_df[hru_names_df[0][2]], linewidth=4)
 
 saax.plot(obs_swe.index, obs_swe , 'ok', markersize=15)#[0:16]
 
 plt.yticks(fontsize=40)
 plt.xlabel('Time 2006-2008', fontsize=40)
 saax.set_ylabel('SWE(mm)', fontsize=40)
-saax.legend('swe',fontsize = 30)#, loc = 'upper left'
+#saax.legend('SWE(mm)',fontsize = 30)#, loc = 'upper left'
 
 sax = np.arange(0,np.size(date_sa))
 sa_xticks = date_sa
-plt.xticks(sax, sa_xticks[::1000], rotation=25, fontsize=40)# 
-saax.xaxis.set_major_locator(ticker.AutoLocator())
-
-ax2 = saax.twinx()  # instantiate a second axes that shares the same x-axis
-
-ax2.plot(av_swe_df[hru_names_df[0][0]].index,av_sd_df['10000stp'], linewidth=4, color = 'red')
-ax2.plot(av_swe_df[hru_names_df[0][0]].index,av_sd_df['10000stp102'], linewidth=4, color = 'orange')
-
-ax2.plot(snowdepth_obs_df2.index, snowdepth_obs_df2['observed_snowdepth'], linewidth=3, color = 'black')
-
-ax2.tick_params(axis='y')
-ax2.legend('snow depth', fontsize = 30)#, loc = 'upper left'
-ax2.set_ylabel('Snow depth', fontsize=40)
-ax2.set_yticklabels([0,0.5,1,1.5,2,2.5,3], fontsize=40)
-
-#ax2.xaxis.set_major_locator(ticker.AutoLocator())
+plt.xticks(sax[::3000], sa_xticks[::3000], rotation=25, fontsize=40)# 
 
 safig.tight_layout()  # otherwise the right y-label is slightly clipped
-plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sd_sa_precip.png')
+plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/sa_sa2_swe_1c_last.png')
+
+#%% ploting snow depth 
+safig2, saax2 = plt.subplots(1,1, figsize=(30,20))#
+
+for hru2 in range (len(hru_names_df[0])):#
+    #print hru_names_df[0][hru]
+    plt.plot(av_sd_df[hru_names_df[0][hru2]], linewidth=4)
+
+plt.plot(snowdepth_obs_df2.index, snowdepth_obs_df2['observed_snowdepth'], 'k', linewidth=6)#[0:16], markersize=15
+
+plt.yticks(fontsize=40)
+plt.xlabel('Time 2006-2008', fontsize=40)
+saax2.set_ylabel('snow depth (mm)', fontsize=40)
+plt.xticks(sax[::3000], sa_xticks[::3000], rotation=25, fontsize=40)# 
+
+safig2.tight_layout()  # otherwise the right y-label is slightly clipped
+plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/sa_sa2_sd_1c_last.png')
+
 #%% day of snow disappearance (based on snowdepth)-final output
 dosd_df2007, dosd_residual_df2007 = calculatingSDD(av_sd_df[:][5000:8737],hru_names_df,5976,'2007',3737,5000)
 dosd_df2008, dosd_residual_df2008 = calculatingSDD(av_sd_df[:][14000:],hru_names_df,15000,'2008',3521,14000)
 
-dosd_residual_df2007min = np.min(dosd_residual_df2007)
-dosd_residual_df2007minM = np.min(dosd_residual_df2007min)
+dosd_residual_df_sum = abs(dosd_residual_df2007)+abs(dosd_residual_df2008)
+dosd_residual_df_sum.index = hruidxID
+dosd_residual_df2007min = np.min(abs(dosd_residual_df2007))
 
-#plt.xticks(x, hru[::3], rotation=25)
-for models in range(len(out_names)):
-    x = list(hruidxID)
-    fig = plt.figure(figsize=(20,15))
-    plt.bar(x,dosd_residual_df2007[out_names[models]])
-    plt.title(out_names[models], fontsize=42)
-    plt.xlabel('hrus',fontsize=30)
-    plt.ylabel('residual SDD (day)', fontsize=30)
-    plt.yticks(fontsize=30)
-    plt.xticks(fontsize=30)
-    plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/figs/SDD_'+out_names[models])
+dosd_residual_df2007min = []
+dosd_residual_df2007min_indx = []
+for combo in out_names:
+    dosdr_min = abs(dosd_residual_df2007).nsmallest(20,combo)[combo]
+    dosd_residual_df2007min.append(pd.DataFrame(dosdr_min))
+    dosdr_min_indx = dosdr_min.index
+    dosd_residual_df2007min_indx.append(dosdr_min_indx.values)
+
+dosd_residual_df2008min = []
+dosd_residual_df2008min_indx = []
+for combo in out_names:
+    dosdr_min2 = abs(dosd_residual_df2008).nsmallest(20,combo)[combo]
+    dosd_residual_df2008min.append(pd.DataFrame(dosdr_min2))
+    dosdr_min_indx2 = dosdr_min2.index
+    dosd_residual_df2008min_indx.append(dosdr_min_indx2.values)
+    
+dosd_residual_dfmin = []
+dosd_residual_dfmin_indx = []
+for combo in out_names:
+    dosdr_min3 = abs(dosd_residual_df_sum).nsmallest(20,combo)[combo]
+    dosd_residual_dfmin.append(pd.DataFrame(dosdr_min3))
+    dosdr_min_indx3 = dosdr_min3.index
+    dosd_residual_dfmin_indx.append(dosdr_min_indx3.values)
+
 #%%**************************************************************************************************
 # *********************** finding max corespondance swe for '2007-05-09 08:50'***********************
 #'2007-04-18' 4776: 4800, '2007-04-23' 4896:4920, '2007-05-02' 5112:5136
@@ -367,55 +400,178 @@ maxSWE2007 = readSpecificDatafromAllHRUs(av_swe_df,hru_names_df[0],5289)
 maxSWE_obs2007 = [711]  
 maxSWE_residual2007 = (pd.DataFrame(mySubtract(maxSWE2007,maxSWE_obs2007))).T
 maxSWE_residual2007.columns = hru_names_df[0]
-maxSWE_residual2007_rsh = pd.DataFrame(np.reshape(np.array(maxSWE_residual2007),(1,4720)).T, columns = out_names)
-maxSWE_residual2007_rsh.index = hruidxID
+maxSWE_residual2007_rsh = np.reshape(np.array(maxSWE_residual2007),(1,len(hru_names_df))).T
+maxSWE_residual2007_df = pd.DataFrame(np.reshape(maxSWE_residual2007_rsh,(len(out_names),len(hruidxID))).T,columns = out_names)#
+maxSWE_residual2007_df.index = hruidxID
 
-
-for models in range(len(out_names)):
-    x = list(hruidxID)
-    fig = plt.figure(figsize=(20,15))
-    plt.bar(x,maxSWE_residual2007_rsh[out_names[models]])
-    plt.title(out_names[models], fontsize=42)
-    plt.xlabel('hrus',fontsize=40)
-    plt.ylabel('residual maxSWE (day)', fontsize=30)
-    plt.yticks(fontsize=30)
-    plt.xticks(fontsize=30)
-    plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/figs/maxSWE_'+out_names[models])
-
-
-
-maxSWE2008 = readSpecificDatafromAllHRUs(av_swe_df,hru_names_df[0],13670)
+maxSWE2008 = readSpecificDatafromAllHRUs(av_swe_df,hru_names_df[0],13488)
 maxSWE_obs2008 = [977]
-#
-#
-#av_swe_df2 = av_swe_df.copy(); av_swe_df2.set_index(av_swe_df['counter'],inplace=True)
-#realMaxSWE = av_swe_df2.max()
-#realMaxSWE_date = av_swe_df2.idxmax() 
+maxSWE_residual2008 = (pd.DataFrame(mySubtract(maxSWE2008,maxSWE_obs2008))).T
+maxSWE_residual2008.columns = hru_names_df[0]
+maxSWE_residual2008_rsh = np.reshape(np.array(maxSWE_residual2008),(1,len(hru_names_df))).T
+maxSWE_residual2008_df = pd.DataFrame(np.reshape(maxSWE_residual2008_rsh,(len(out_names),len(hruidxID))).T,columns = out_names)#
+maxSWE_residual2008_df.index = hruidxID
+
+maxSWE_residual_dfmin_2008 = []
+maxSWE_residual_dfmin_2008_indx = []
+for combo in out_names:
+    maxSWEr_min2008 = abs(maxSWE_residual2008_df).nsmallest(20,combo)[combo]
+    maxSWE_residual_dfmin_2008.append(pd.DataFrame(maxSWEr_min2008))
+    maxSWEr_min_indx2008 = maxSWEr_min2008.index
+    maxSWE_residual_dfmin_2008_indx.append(maxSWEr_min_indx2008.values)
+
+maxSWE_residual_dfmin_2007 = []
+maxSWE_residual_dfmin_2007_indx = []
+for combo in out_names:
+    maxSWEr_min2007 = abs(maxSWE_residual2007_df).nsmallest(20,combo)[combo]
+    maxSWE_residual_dfmin_2007.append(pd.DataFrame(maxSWEr_min2007))
+    maxSWEr_min_indx2007 = maxSWEr_min2007.index
+    maxSWE_residual_dfmin_2007_indx.append(maxSWEr_min_indx2007.values)
+    
+maxSWE_residual_df_sum = abs(maxSWE_residual2007_df)+abs(maxSWE_residual2008_df)
+maxSWE_residual_dfmin = []
+maxSWE_residual_dfmin_indx = []
+for combo in out_names:
+    maxSWEr_min3 = abs(maxSWE_residual_df_sum).nsmallest(20,combo)[combo]
+    maxSWE_residual_dfmin.append(pd.DataFrame(maxSWEr_min3))
+    maxSWEr_min_indx3 = maxSWEr_min3.index
+    maxSWE_residual_dfmin_indx.append(maxSWEr_min_indx3.values)
+    
 #%%**************************************************************************************************
-## ********************** calculating snowmelt rate based on SWE *************************************
-#sweM1,SWE1date = SWEandSWEDateforSpecificDate(hru_names_df[0],5289,av_swe_df,dosd_df)
-#sweM2,SWE2date = SWEandSWEDateforSpecificDate(hru_names_df[0],5457,av_swe_df,dosd_df)
-#sweM3,SWE3date = SWEandSWEDateforSpecificDate(hru_names_df[0],5793,av_swe_df,dosd_df)
-#sweM4,SWE4date = SWEandSWEDateforSpecificDate(hru_names_df[0],5960,av_swe_df,dosd_df)
-##%%
-#meltingrate1 = meltingRateBetween2days(sweM1,sweM2,SWE1date,SWE2date)
-#meltingrate2 = meltingRateBetween2days(sweM2,sweM3,SWE2date,SWE3date)
-#meltingrate3 = meltingRateBetween2days(sweM3,sweM4,SWE3date,SWE4date)
-#
-#meltingrateAvg_mod = []
-#for countermr in range (np.size(meltingrate1)):
-#    meltingrateAvg_mod.append((meltingrate1[countermr]+meltingrate2[countermr]+meltingrate3[countermr])/3)
-##%%
-#sweMR = [711, 550, 309, 84]
-#mrDate = ['2007-05-09 08:50 5289','2007-05-16 09:00 5457','2007-05-30 09:00 5793','2007-06-06 08:15 5960']  
-#meltingrate1_obs = np.array([0.1*24*(711-550.)/(5457.-5289)])
-#meltingrate2_obs = np.array([0.1*24*(550.-309)/(5793.-5457)])
-#meltingrate3_obs = np.array([0.1*24*(309-84.)/(5960-5793.)])
-#meltingrateAvg_obs = (meltingrate1_obs+meltingrate2_obs+meltingrate3_obs)/3.
-##'2007-05-09 08:50':5289, to '2007-06-06 08:15': 5960, 
-##swe_mm = [711, 84]
-#meltingRate_obs = [0.1*24*(711-84.)/(5960-5289.)] #cm/day
-##%% new criteria-swe before max 
+## *********** calculating snowmelt rate based on SWE #cm/day *************************************
+maxSWE2008 = readSpecificDatafromAllHRUs(av_swe_df,hru_names_df[0],13670)
+#2007
+sweM1,SWE1date = SWEandSWEDateforSpecificDate(hru_names_df[0],5289,av_swe_df,dosd_df2007)
+sweM2,SWE2date = SWEandSWEDateforSpecificDate(hru_names_df[0],5457,av_swe_df,dosd_df2007)
+sweM3,SWE3date = SWEandSWEDateforSpecificDate(hru_names_df[0],5799,av_swe_df,dosd_df2007)
+sweM4,SWE4date = SWEandSWEDateforSpecificDate(hru_names_df[0],5965,av_swe_df,dosd_df2007)
+#2008
+sweM5,SWE5date = SWEandSWEDateforSpecificDate(hru_names_df[0],13488,av_swe_df,dosd_df2008)
+sweM6,SWE6date = SWEandSWEDateforSpecificDate(hru_names_df[0],14320,av_swe_df,dosd_df2008)
+sweM7,SWE7date = SWEandSWEDateforSpecificDate(hru_names_df[0],14485,av_swe_df,dosd_df2008)
+sweM8,SWE8date = SWEandSWEDateforSpecificDate(hru_names_df[0],14800,av_swe_df,dosd_df2008)
+
+#%%  #cm/day
+meltingrate20071 = meltingRateBetween2days(sweM1,sweM2,SWE1date,SWE2date)
+meltingrate20072 = meltingRateBetween2days(sweM2,sweM3,SWE2date,SWE3date)
+meltingrate20073 = meltingRateBetween2days(sweM3,sweM4,SWE3date,SWE4date)
+
+meltingrateAvg_2007 = []
+for countermr in range (np.size(meltingrate20071)):
+    meltingrateAvg_2007.append((meltingrate20071[countermr]+meltingrate20072[countermr]+meltingrate20073[countermr])/3)
+
+meltingrate20081 = meltingRateBetween2days(sweM5,sweM6,SWE5date,SWE6date)
+meltingrate20082 = meltingRateBetween2days(sweM6,sweM7,SWE6date,SWE7date)
+meltingrate20083 = meltingRateBetween2days(sweM7,sweM8,SWE7date,SWE8date)
+
+meltingrateAvg_2008 = []
+for countermr1 in range (np.size(meltingrate20081)):
+    meltingrateAvg_2008.append((meltingrate20081[countermr1]+meltingrate20082[countermr1]+meltingrate20083[countermr1])/3)
+
+#%%  #cm/day
+sweMR = [711, 550, 309, 84]
+mrDate = ['2007-05-09 08:50 5289','2007-05-16 09:00 5457','2007-05-30 09:00 5793','2007-06-06 08:15 5960']  
+meltingrate1_obs2007 = np.array([0.1*24*(711-550.)/(5457.-5289)])
+meltingrate2_obs2007 = np.array([0.1*24*(550.-309)/(5799.-5457)])
+meltingrate3_obs2007 = np.array([0.1*24*(309-84.)/(5965-5799.)])
+meltingrateAvg_obs2007 = (meltingrate1_obs2007+meltingrate2_obs2007+meltingrate3_obs2007)/3.
+#'2007-05-09 08:50':5289, to '2007-06-06 08:15': 5960, 
+#swe_mm = [711, 84]
+meltingRate_obs2007 = [0.1*24*(711-84.)/(5965-5289.)] 
+
+meltingrate1_obs2008 = np.array([0.1*24*(977-851.)/(14320.-13488)])
+meltingrate2_obs2008 = np.array([0.1*24*(851.-739)/(14485.-14320)])
+meltingrate3_obs2008 = np.array([0.1*24*(739-381.)/(14800-14485.)])
+meltingrateAvg_obs2008 = (meltingrate1_obs2008+meltingrate2_obs2008+meltingrate3_obs2008)/3.
+
+#%%
+meltRate_residual2007 = (pd.DataFrame(mySubtract(meltingrateAvg_2007,meltingrateAvg_obs2007))).T
+meltRate_residual2007.columns = hru_names_df[0]
+meltRate_residual2007_rsh = np.reshape(np.array(meltRate_residual2007),(1,len(hru_names_df))).T
+meltRate_residual2007_df = pd.DataFrame(np.reshape(meltRate_residual2007_rsh,(len(out_names),len(hruidxID))).T,columns = out_names)#
+meltRate_residual2007_df.index = hruidxID
+
+meltRate_residual2008 = (pd.DataFrame(mySubtract(meltingrateAvg_2008,meltingrateAvg_obs2008))).T
+meltRate_residual2008.columns = hru_names_df[0]
+meltRate_residual2008_rsh = np.reshape(np.array(meltRate_residual2008),(1,len(hru_names_df))).T
+meltRate_residual2008_df = pd.DataFrame(np.reshape(meltRate_residual2008_rsh,(len(out_names),len(hruidxID))).T,columns = out_names)#
+meltRate_residual2008_df.index = hruidxID
+
+meltRate_residual_df_sum = abs(meltRate_residual2007_df)+abs(meltRate_residual2008_df)
+meltRate_residual_dfmin = []
+meltRate_residual_dfmin_indx = []
+for combo in out_names:
+    meltRater_min3 = abs(meltRate_residual_df_sum).nsmallest(20,combo)[combo]
+    meltRate_residual_dfmin.append(pd.DataFrame(meltRater_min3))
+    meltRater_min_indx3 = meltRater_min3.index
+    meltRate_residual_dfmin_indx.append(meltRater_min_indx3.values)
+#%%
+#A = np.array([2,4,561,8,9])
+#B = np.array([3,14,8,561,19])
+#list(set(A) & set(B))
+#list(set(dosd_residual_dfmin100_indx[0]) & set(maxSWE_residual_dfmin100_indx[0]))
+hru_dosdr =[]
+hru_maxSWEr =[]
+hru_maxSWEr2007 =[]
+hru_maxSWEr2008 =[]
+hru_meltRater = []
+for i in range (len(out_names)):
+    hru_maxSWEr2007.append(['{}{}'.format(j, out_names[i]) for j in maxSWE_residual_dfmin_2007_indx[i]])
+    hru_maxSWEr2008.append(['{}{}'.format(j, out_names[i]) for j in maxSWE_residual_dfmin_2008_indx[i]])
+    hru_maxSWEr.append(['{}{}'.format(j, out_names[i]) for j in maxSWE_residual_dfmin_indx[i]])
+    hru_dosdr.append(['{}{}'.format(k, out_names[i]) for k in dosd_residual_dfmin_indx[i]])
+    hru_meltRater.append(['{}{}'.format(k, out_names[i]) for k in meltRate_residual_dfmin_indx[i]])
+
+hru_dosdr_r = np.reshape(hru_dosdr,(20,1))
+hru_maxSWEr_r = np.reshape(hru_maxSWEr,(20,1))
+hru_meltRate_r = np.reshape(hru_meltRater,(20,1))
+hru_maxSWEr2008_r = np.reshape(hru_maxSWEr2008,(20,1))
+hru_maxSWEr2007_r = np.reshape(hru_maxSWEr2007,(20,1))
+#%%
+safig, saax = plt.subplots(1,1, figsize=(30,20))#
+color = []
+for hru in range (len(hru_dosdr_r)):
+    plt.plot(av_swe_df[hru_dosdr_r[hru]],  'green', linewidth=4)#
+#for hru3 in range (len(hru_meltRater)):
+#    plt.plot(av_swe_df[hru_meltRater[hru3]], 'pink', linewidth=4)
+#for hru in range (len(hru_maxSWEr_r)):
+#    plt.plot(av_swe_df[hru_maxSWEr_r[hru]], 'blue', linewidth=4)#'green', 
+
+    
+saax.plot(obs_swe.index, obs_swe , 'ok', markersize=15)#[0:16]
+
+plt.yticks(fontsize=40)
+plt.xlabel('Time 2006-2008', fontsize=40)
+saax.set_ylabel('SWE(mm)', fontsize=40)
+#saax.legend('SWE(mm)',fontsize = 30)#, loc = 'upper left'
+
+sax = np.arange(0,np.size(date_sa))
+sa_xticks = date_sa
+plt.xticks(sax[::3000], sa_xticks[::3000], rotation=25, fontsize=40)# 
+
+safig.tight_layout()  # otherwise the right y-label is slightly clipped
+plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/sa_sa2_swe_bestSd_newP2.png')
+#%%
+safig2, saax2 = plt.subplots(1,1, figsize=(30,20))#
+
+for hru4 in range (len(hru_dosdr_r)):#len(hru_names_df[0]),
+    plt.plot(av_sd_df[hru_dosdr_r[hru4]], 'green',linewidth=4)# 
+#for hru5 in range (len(hru_meltRater)):#len(hru_names_df[0]),
+#    plt.plot(av_sd_df[hru_meltRater[hru5]], 'pink', linewidth=4)#'green', 
+#for hru6 in range (len(hru_maxSWEr_r)):#len(hru_names_df[0]),
+#    plt.plot(av_sd_df[hru_maxSWEr_r[hru6]], 'blue', linewidth=4)#'green', 
+
+plt.plot(snowdepth_obs_df2.index, snowdepth_obs_df2['observed_snowdepth'], 'k', linewidth=6)#[0:16], markersize=15
+
+plt.yticks(fontsize=40)
+plt.xlabel('Time 2006-2008', fontsize=40)
+saax2.set_ylabel('snow depth (mm)', fontsize=40)
+plt.xticks(sax[::3000], sa_xticks[::3000], rotation=25, fontsize=40)# 
+
+safig2.tight_layout()  # otherwise the right y-label is slightly clipped
+plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/sa_sa2_sd_bestsdd_newP2.png')
+
+#%% new criteria-swe before max 
 #swe2bfrmax = readSpecificDatafromAllHRUs(av_swe_df,hru_names_df[0],4906)
 #swe3bfrmax = readSpecificDatafromAllHRUs(av_swe_df,hru_names_df[0],4785)
 #
@@ -468,7 +624,20 @@ maxSWE_obs2008 = [977]
 ###observed cold content in each day
 #
 #
-#
+#ax2 = saax.twinx()  # instantiate a second axes that shares the same x-axis
+
+ax2.plot(av_swe_df[hru_names_df[0][0]].index,av_sd_df['10000stp'], linewidth=4, color = 'red')
+ax2.plot(av_swe_df[hru_names_df[0][0]].index,av_sd_df['10000stp102'], linewidth=4, color = 'orange')
+
+ax2.plot(snowdepth_obs_df2.index, snowdepth_obs_df2['observed_snowdepth'], linewidth=3, color = 'black')
+
+ax2.tick_params(axis='y')
+ax2.legend('snow depth', fontsize = 30)#, loc = 'upper left'
+ax2.set_ylabel('Snow depth', fontsize=40)
+ax2.set_yticklabels([0,0.5,1,1.5,2,2.5,3], fontsize=40)
+
+#ax2.xaxis.set_major_locator(ticker.AutoLocator())
+
 #
 #
 #

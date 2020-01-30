@@ -38,7 +38,7 @@ def param_fill(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15,
     return(p1l, p2l, p3l, p4l, p5l, p6l, p7l, p8l, p9l, p10l, p11l, p12l, p13l, p14l, p15l, p16l, p17l)# , p18l 
 
 #%%  all parameters
-with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/STAR_out_fpm12p20.csv") as safd:
+with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/STAR_out_P12_233_L.csv") as safd:
     reader = csv.reader(safd)
     params0 = [r for r in reader]
 params1 = params0[1:]
@@ -50,7 +50,7 @@ params_sa=np.reshape(sa_fd_column,(len (params1),21))
 
 paramfile = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/summa_zParamTrial_variableDecayRate_sa_sa2.nc",'w',format='NETCDF3_CLASSIC') #create new paramtrail.nc file
 
-hruidxID = list(np.arange(10000,12180))
+hruidxID = list(np.arange(10000,10000+len (params_sa))) #after crash  11126
 hru_num = np.size(hruidxID)
 
 #%% #create new paramtrail.nc file and adding vaiables to it --- summa_zParamTrial_variableDecayRate_test
@@ -61,7 +61,7 @@ hidx = paramfile.createVariable('hruIndex', np.float64,('hru',)) # add hruIndex 
 param_nam_list = ['LAIMIN','LAIMAX','winterSAI','summerLAI','rootingDepth','heightCanopyTop','heightCanopyBottom',
                   'throughfallScaleSnow','newSnowDenMin','albedoDecayRate','albedoMaxVisible','albedoMinVisible',
                   'albedoMaxNearIR','albedoMinNearIR','albedoRefresh','albedoSootLoad',
-                  'Frad_vis','mw_exp','k_snow','critRichNumber','frozenPrecipMultip'] #,'fixedThermalCond_snow'
+                  'Frad_vis','mw_exp','k_snow','critRichNumber','tempCritRain'] #,'fixedThermalCond_snow' 'frozenPrecipMultip'
 #	
 # call the function on the parameters
 #valst1 = param_fill(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17) #,p18 
@@ -69,7 +69,7 @@ param_nam_list = ['LAIMIN','LAIMAX','winterSAI','summerLAI','rootingDepth','heig
 for param in param_nam_list:
     paramfile.createVariable(param, np.float64,('hru',))
 
-constant_params = ['rootDistExp','theta_sat','theta_res','vGn_alpha','vGn_n','k_soil','critSoilWilting','critSoilTranspire']
+constant_params = ['rootDistExp','theta_sat','theta_res','vGn_alpha','vGn_n','k_soil','critSoilWilting','critSoilTranspire', 'frozenPrecipMultip']
 for params in constant_params:
     paramfile.createVariable(params, np.float64,('hru',))
 #paramfile.close()
@@ -105,15 +105,15 @@ print (paramfile.variables['frozenPrecipMultip'][:])
 aaa = paramfile.variables['LAIMIN'][:]
 paramfile.close()
 #%% 
-varcheck = Dataset ('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/summa_zParamTrial_variableDecayRate_sa_sa2.nc')
-#print varcheck.variables['fixedThermalCond_snow'][:]
-#print np.size(varcheck.variables['fixedThermalCond_snow'][:])
-
-for varname in varcheck.variables.keys():
-    var = paramfile.variables[varname]
-    print varname, var.dtype, var.dimensions, var.shape
-
-print varcheck.variables['frozenPrecipMultip'][:]
+#varcheck = Dataset ('C:/Users/HHS/summaTestCases_2.x/settings/swampAngel/sa_sa2_vars/summa_zParamTrial_variableDecayRate_sa_sa2.nc')#C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/
+##print varcheck.variables['fixedThermalCond_snow'][:]
+##print np.size(varcheck.variables['fixedThermalCond_snow'][:])
+#
+#for varname in varcheck.variables.keys():
+#    var = paramfile.variables[varname]
+#    print varname, var.dtype, var.dimensions, var.shape
+#
+#print varcheck.variables['frozenPrecipMultip'][:]
 #I checked it in Check.py code
 #%% # local attributes file
 # create a new localAtribute file ---- summa_zLocalAttributes_swampAngel_vtest
@@ -165,13 +165,16 @@ local_atrbt.variables['hru2gruId'][:] = c3
 
 local_atrbt.variables['hruId'][:] = hruidxID
 
+c4 = np.repeat([3.5], hru_num)
+local_atrbt.variables['mHeight'][:] = c4
+
 #print local_atrbt.variables['hruId'][:]
 
 local_atrbt.close()
 #%%
 lacheck = Dataset('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/summa_zLocalAttributes_swampAngel.nc')
 
-print lacheck.variables['hruId'][:]
+print lacheck.variables['mHeight'][:]
 #for j in laCheck.variables:
 #    print j
 for varname in lacheck.variables.keys():
@@ -225,6 +228,6 @@ iccheck = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp
 #for varname in iccheck.variables.keys():
 #    var = iccheck.variables[varname]
 #    print (varname, var.dtype, var.dimensions, var.shape)
-print iccheck.variables['nSoil'][:]
+print len(iccheck.variables['nSoil'][0])
 
 

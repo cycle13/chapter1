@@ -52,6 +52,30 @@ def readVariablefromMultipleNcfilesDatasetasDF(av_all,variable,hruname_df,hruidx
     
     return variable_df
 
+def readVariablefromMultipleNcfilesDatasetasDF40neYear(av_all,variable,hruname_df,hruidxID,out_names):
+    
+    variableList = []
+    for ds in range(len(hruname_df)/len(hruidxID)): # 22/2
+        variableNameList = []
+        variableNameList_year1 = av_all[ds][variable][:]
+        variableList.append(variableNameList_year1)
+    
+    list_col = []
+    for i in range (len(out_names)):
+        for j in range (len(hruidxID)):
+            column = variableList[i][:,j]
+            list_col.append(column)
+    
+    variable_arr = np.array(list_col).T
+    
+    variable_df = pd.DataFrame(variable_arr, columns = hruname_df[0])
+    counter = pd.DataFrame(np.arange(0,np.size(variable_df[hruname_df[0][0]])),columns=['counter'])    
+    counter.set_index(variable_df.index,inplace=True)
+    variable_df = pd.concat([counter, variable_df], axis=1)
+    
+    return variable_df
+
+
 def readVariablefromMultipleNcfilesDatasetasDF4AYear(av_all,variable,hruname_df,hruidxID,out_names):
 
     variableList = []
@@ -266,10 +290,10 @@ snowdepth_obs_df2 = pd.DataFrame(sa_sd_obs, columns = ['observed_snowdepth'])
 indx_sd = np.arange(0,16056,24)
 snowdepth_obs_df2.set_index(indx_sd,inplace=True)
 #%% defining hrus_name
-hruidxID = list(np.arange(10000,11150))    
+hruidxID = list(np.arange(10000,10954))    
 hru_num = np.size(hruidxID)
-years = ['2007','2008']
-out_names = ["lth","ltc","ltp","ljc","ljp","sjc","sjp","stc"]
+years = ['2007','2008']#
+out_names = ["ljh","ljp","ljc","ltc"]#"lth","ltp","sth","stc","sjc","sjp"
                        
 paramModel = (np.size(out_names))*(hru_num)
 hru_names =[]
@@ -285,8 +309,11 @@ av_all = readAllNcfilesAsDataset(av_ncfiles)
 #DateSa2007 = date(av_all[0],"%Y-%m-%d %H:%M")
 #DateSa2008 = date(av_all[1],"%Y-%m-%d %H:%M")
 
+#av_swe_df = readVariablefromMultipleNcfilesDatasetasDF40neYear(av_all,'scalarSWE',hru_names_df,hruidxID,out_names)
+
 av_sd_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'scalarSnowDepth',hru_names_df,hruidxID,out_names)
 av_swe_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'scalarSWE',hru_names_df,hruidxID,out_names)
+
 
 #%% ploting annual swe curves 
 
@@ -296,55 +323,54 @@ date_sa = np.append(DateSa21,DateSa22)
 #av_swe_df.index = date_sa
 safig, saax = plt.subplots(1,1, figsize=(30,20))#
 
-for hru in range (864,876):#,2len(hru_names_df[0])
-    print hru_names_df[0][hru]
-    plt.plot(av_swe_df[hru_names_df[0][hru]], linewidth=4)
-#for hru in range (1344,1356):#,2len(hru_names_df[0])
-#    print hru_names_df[0][hru]
-#    plt.plot(av_swe_df[hru_names_df[0][hru]], linewidth=4)
-
-for hru in range (2):#len(hru_names_df[0]),
+for hru in range (len(hru_names_df[0])):#len(hru_names_df[0]),
     #print hru_names_df[0][hru]
     plt.plot(av_swe_df[hru_names_df[0][hru]], linewidth=4)
-
-#saax.plot(av_swe_df[hru_names_df[0][0]].index, av_swe_df[hru_names_df[0][0]], linewidth=4)
-#saax.plot(av_swe_df[hru_names_df[0][0]].index, av_swe_df[hru_names_df[0][1]], linewidth=4, color = 'green')
-#saax.plot(av_swe_df[hru_names_df[0][0]].index, av_swe_df[hru_names_df[0][2]], linewidth=4)
 
 saax.plot(obs_swe.index, obs_swe , 'ok', markersize=15)#[0:16]
 
 plt.yticks(fontsize=40)
 plt.xlabel('Time 2006-2008', fontsize=40)
 saax.set_ylabel('SWE(mm)', fontsize=40)
-saax.legend('swe',fontsize = 30)#, loc = 'upper left'
+#saax.legend('SWE(mm)',fontsize = 30)#, loc = 'upper left'
 
 sax = np.arange(0,np.size(date_sa))
 sa_xticks = date_sa
-plt.xticks(sax, sa_xticks[::1000], rotation=25, fontsize=40)# 
-saax.xaxis.set_major_locator(ticker.AutoLocator())
-
-ax2 = saax.twinx()  # instantiate a second axes that shares the same x-axis
-
-ax2.plot(av_swe_df[hru_names_df[0][0]].index,av_sd_df['10000stp'], linewidth=4, color = 'red')
-ax2.plot(av_swe_df[hru_names_df[0][0]].index,av_sd_df['10000stp102'], linewidth=4, color = 'orange')
-
-ax2.plot(snowdepth_obs_df2.index, snowdepth_obs_df2['observed_snowdepth'], linewidth=3, color = 'black')
-
-ax2.tick_params(axis='y')
-ax2.legend('snow depth', fontsize = 30)#, loc = 'upper left'
-ax2.set_ylabel('Snow depth', fontsize=40)
-ax2.set_yticklabels([0,0.5,1,1.5,2,2.5,3], fontsize=40)
-
-#ax2.xaxis.set_major_locator(ticker.AutoLocator())
+plt.xticks(sax[::3000], sa_xticks[::3000], rotation=25, fontsize=40)# 
 
 safig.tight_layout()  # otherwise the right y-label is slightly clipped
-plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sd_sa_precip.png')
+plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/sa_sa2_swe_4c.png')
+
+#%% ploting snow depth 
+safig2, saax2 = plt.subplots(1,1, figsize=(30,20))#
+
+for hru2 in range (len(hru_names_df[0])):#
+    #print hru_names_df[0][hru]
+    plt.plot(av_sd_df[hru_names_df[0][hru2]], linewidth=4)
+
+plt.plot(snowdepth_obs_df2.index, snowdepth_obs_df2['observed_snowdepth'], 'k', linewidth=6)#[0:16], markersize=15
+
+plt.yticks(fontsize=40)
+plt.xlabel('Time 2006-2008', fontsize=40)
+saax2.set_ylabel('snow depth (mm)', fontsize=40)
+plt.xticks(sax[::3000], sa_xticks[::3000], rotation=25, fontsize=40)# 
+
+safig2.tight_layout()  # otherwise the right y-label is slightly clipped
+plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/sa_sa2_sd_4c.png')
+
 #%% day of snow disappearance (based on snowdepth)-final output
 dosd_df2007, dosd_residual_df2007 = calculatingSDD(av_sd_df[:][5000:8737],hru_names_df,5976,'2007',3737,5000)
 dosd_df2008, dosd_residual_df2008 = calculatingSDD(av_sd_df[:][14000:],hru_names_df,15000,'2008',3521,14000)
 
-dosd_residual_df2007min = np.min(dosd_residual_df2007)
-dosd_residual_df2007minM = np.min(dosd_residual_df2007min)
+dosd_residual_df2007min = np.min(abs(dosd_residual_df2007))
+
+dosd_residual_df2007min20 = []
+dosd_residual_df2007min20_indx = []
+for combo in out_names:
+    dosdr_20min = abs(dosd_residual_df2007).nsmallest(20,combo)[combo]
+    dosd_residual_df2007min20.append(pd.DataFrame(dosdr_20min))
+    dosdr_20min_indx = dosdr_20min.index
+    dosd_residual_df2007min20_indx.append(dosdr_20min_indx.values)
 
 #plt.xticks(x, hru[::3], rotation=25)
 for models in range(len(out_names)):
@@ -468,7 +494,20 @@ maxSWE_obs2008 = [977]
 ###observed cold content in each day
 #
 #
-#
+#ax2 = saax.twinx()  # instantiate a second axes that shares the same x-axis
+
+ax2.plot(av_swe_df[hru_names_df[0][0]].index,av_sd_df['10000stp'], linewidth=4, color = 'red')
+ax2.plot(av_swe_df[hru_names_df[0][0]].index,av_sd_df['10000stp102'], linewidth=4, color = 'orange')
+
+ax2.plot(snowdepth_obs_df2.index, snowdepth_obs_df2['observed_snowdepth'], linewidth=3, color = 'black')
+
+ax2.tick_params(axis='y')
+ax2.legend('snow depth', fontsize = 30)#, loc = 'upper left'
+ax2.set_ylabel('Snow depth', fontsize=40)
+ax2.set_yticklabels([0,0.5,1,1.5,2,2.5,3], fontsize=40)
+
+#ax2.xaxis.set_major_locator(ticker.AutoLocator())
+
 #
 #
 #
