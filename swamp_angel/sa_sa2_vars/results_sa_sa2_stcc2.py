@@ -231,6 +231,39 @@ def calculatingSDD(av_sd_df,hru_names_df,sdd_obs,year,resNum1,resNum2):
     dosd_residual_df = pd.DataFrame(np.reshape(np.array(dosd_residual),(np.size(out_names),hru_num)).T, columns=out_names)
 
     return dosd_df, dosd_residual_df
+
+def readData4multibleLayers4specificDateofAvailableSWE(av_mlt_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1):
+    layerTemp4dates = []
+    for dates in range (len(obs_swe_ind)):
+        hruLayerTemp = []
+        for hrus in range (len(hru_names_df[0])):
+            strt = int(sum0flayers0[dates][hrus])
+            end = int(sum0flayers1[dates][hrus])
+            date1LayerTemp = av_mlt_df[hru_names_df[0][hrus]][strt:end]
+            hruLayerTemp.append(date1LayerTemp)
+        layerTemp4dates.append(hruLayerTemp)
+    return layerTemp4dates
+
+def readData4multibleSnowLayers4specificDateofAvailableSWE(av_mlt_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1):
+    layerTemp4dates = []
+    for dates in range (len(obs_swe_ind)):
+        hruLayerTemp = []
+        for hrus in range (len(hru_names_df[0])):
+            strt = int(sum0flayers0[dates][hrus])
+            end = int(sum0flayers1[dates][hrus])
+            date1LayerTemp = av_mlt_df[hru_names_df[0][hrus]][strt:end]
+            hruLayerTemp.append(date1LayerTemp)
+        layerTemp4dates.append(hruLayerTemp)
+    
+    snowLayerTemp4dates = []
+    for dates2 in range (len(obs_swe_ind)):
+        hrusnowLayerTemp = []
+        for hrus2 in range (len(hru_names_df[0])):
+            date1snowLayerTemp = layerTemp4dates[dates2][hrus2][:-8]
+            hrusnowLayerTemp.append(date1snowLayerTemp)
+        snowLayerTemp4dates.append(hrusnowLayerTemp)
+        
+    return snowLayerTemp4dates
 #%% SWE observation data 
 date_swe = ['2006-11-01 11:10','2006-11-30 12:30','2007-01-01 11:10','2007-01-30 10:35','2007-03-05 14:30','2007-03-12 14:00', 
             '2007-03-19 12:30','2007-03-26 12:30','2007-04-02 12:30','2007-04-18 08:35','2007-04-23 10:30','2007-05-02 08:40', 
@@ -347,7 +380,6 @@ av_st_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'scalarSurfaceTemp'
 av_sst_date = np.append(date(av_all[0],"%Y-%m-%d %H:%M"),date(av_all[1],"%Y-%m-%d %H:%M"))
 av_st_df.index = av_sst_date
 av_st_df2 =pd.DataFrame(av_st_df.values, columns=av_st_df.columns)
-
 av_st_morn_df = pd.DataFrame((av_st_df[:]['2006-10-01 03:00':'2008-06-13 04:00':24].values+
                               av_st_df[:]['2006-10-01 04:00':'2008-06-13 05:00':24].values+
                               av_st_df[:]['2006-10-01 05:00':'2008-06-13 06:00':24].values+
@@ -355,14 +387,37 @@ av_st_morn_df = pd.DataFrame((av_st_df[:]['2006-10-01 03:00':'2008-06-13 04:00':
 av_st_morn_df.index = snowdepth_obs_df.index[0:len(sst_obs_morn_df)]
 av_st_morn_df2 = pd.DataFrame(av_st_morn_df.values, columns=av_st_df2.columns)
 av_st_morn_df2.set_index(sst_obs_morn_df2.index,inplace=True)
+#modeled cold content
+#number of snow layer
+av_nsl_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'nSnow',hru_names_df,hruidxID,out_names)
+nsnow = [av_nsl_df.values[ns,1:] for ns in obs_swe_ind]
+# snow layers temperature
+av_mlt_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'mLayerTemp',hru_names_df,hruidxID,out_names)
+sum0flayers0 = []
+for ns in obs_swe_ind:
+    if ns<8760:
+        sum0flayer = np.sum(av_nsl_df.values[0:ns,1:]+8., axis=0)
+        sum0flayers0.append(sum0flayer)
+    else: 
+        sum0flayer = 235214 + np.sum(av_nsl_df.values[8760:ns,1:]+8., axis=0)
+        sum0flayers0.append(sum0flayer)
+#sum0flayers0 = [np.sum(av_nsl_df.values[0:ns,1:]+8., axis=0) for ns in obs_swe_ind[0:17]]
+sum0flayers1 = []
+for ns in obs_swe_ind:
+    if ns<8760:
+        sum0flayers = np.sum(av_nsl_df.values[0:ns+1,1:]+8., axis=0)
+        sum0flayers1.append(sum0flayers)
+    else: 
+        sum0flayers = 235214 + np.sum(av_nsl_df.values[8760:ns+1,1:]+8., axis=0)
+        sum0flayers1.append(sum0flayers)
+#sum0flayers1 = [np.sum(av_nsl_df.values[0:ns+1,1:]+8., axis=0) for ns in obs_swe_ind[0:17]]
+layerTemp4dates = readData4multibleLayers4specificDateofAvailableSWE(av_mlt_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
+snowLayerTemp4dates = readData4multibleSnowLayers4specificDateofAvailableSWE(av_mlt_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
 
-#av_mlt_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'mLayerTemp',hru_names_df,hruidxID,out_names)
-#av_all[0]['nSnow']
-#
-#
-#iLayerHeight              | 1   
-#mLayerDepth               | 1    
-#mLayerHeight              | 1 
+#height of each layer
+av_mld_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'mLayerDepth',hru_names_df,hruidxID,out_names)
+layerDepth4dates = readData4multibleLayers4specificDateofAvailableSWE(av_mld_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
+
 #mLayerVolFracIce          | 1    
 #mLayerVolFracLiq          | 1    
 #mLayerVolFracWat          | 1    
@@ -609,7 +664,6 @@ ind_df_mean_perc_bestSWE_bestMR = (meltRate_residual_df_mean_perc_bestSWE[meltRa
 dosd_residual_df_sum_r_bestSWE_bestMR = dosd_residual_df_sum_r[ind_df_mean_perc_bestSWE_bestMR]
 ind_df_mean_perc_bestSWE_bestMR_bestSDD = (dosd_residual_df_sum_r_bestSWE_bestMR[dosd_residual_df_sum_r_bestSWE_bestMR<=11]).index
 
-#%%
 #%% snow surface temp obj func.
 sst_obs_morn_2007 = sst_obs_morn_df['2007-03-20':'2007-05-15']
 sst_obs_morn_2008 = sst_obs_morn_df['2008-04-01':'2008-05-15']
@@ -690,102 +744,10 @@ plt.xticks(sax[::3000], sa_xticks[::3000], rotation=25, fontsize=40)#
 
 safig2.tight_layout()  # otherwise the right y-label is slightly clipped
 plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/sa_sa2_sd_taSweMrSDD6.png')
-#%%
-#A = np.array([2,4,561,8,9])
-#B = np.array([3,14,8,561,19])
-#list(set(A) & set(B))
-#list(set(dosd_residual_dfmin100_indx[0]) & set(maxSWE_residual_dfmin100_indx[0]))
-#hru_dosdr =[]
-#hru_maxSWEr =[]
-#hru_meltRater = []
-#hru_of = []
-##hru_maxSWEr2007 =[]
-##hru_maxSWEr2008 =[]
-#for i in range (len(out_names)):
-##    hru_maxSWEr2007.append(['{}{}'.format(j, out_names[i]) for j in maxSWE_residual_dfmin_2007_indx[i]])
-##    hru_maxSWEr2008.append(['{}{}'.format(j, out_names[i]) for j in maxSWE_residual_dfmin_2008_indx[i]])
-#    hru_maxSWEr.append(['{}{}'.format(j, out_names[i]) for j in maxSWE_residual_dfmin_indx[i]])
-#    hru_dosdr.append(['{}{}'.format(k, out_names[i]) for k in dosd_residual_dfmin_indx[i]])
-#    hru_meltRater.append(['{}{}'.format(k, out_names[i]) for k in meltRate_residual_dfmin_indx[i]])
-#    hru_of.append(['{}{}'.format(k, out_names[i]) for k in of_residual_dfmin_indx[i]])
-#
-#hru_dosdr_r = np.reshape(hru_dosdr,(20,1))
-#hru_maxSWEr_r = np.reshape(hru_maxSWEr,(20,1))
-#hru_meltRate_r = np.reshape(hru_meltRater,(20,1))
-#hru_of_r = np.reshape(hru_of,(20,1))
-#hru_maxSWEr2008_r = np.reshape(hru_maxSWEr2008,(20,1))
+
 #hru_maxSWEr2007_r = np.reshape(hru_maxSWEr2007,(20,1))
 #%% new criteria-swe before max 
-#swe2bfrmax = readSpecificDatafromAllHRUs(av_swe_df,hru_names_df[0],4906)
-#swe3bfrmax = readSpecificDatafromAllHRUs(av_swe_df,hru_names_df[0],4785)
-#
-#swe2bmax_obs = [654]
-#swe3bmax_obs = [678]
-##%% defining criteria
-##coldcontentcrit = [abs(values) for values in mySubtract(coldcontent0305,cc0305)]
-#meltingRateCrit = [abs(values) for values in mySubtract(meltingrateAvg_mod,meltingrateAvg_obs)]
-#maxSWEcrit = [abs(values) for values in mySubtract(maxSWE,maxSWE_obs)]
-#swe2bmaxCrit = [abs(values) for values in mySubtract(swe2bfrmax,swe2bmax_obs)]
-#swe3bmaxCrit = [abs(values) for values in mySubtract(swe3bfrmax,swe3bmax_obs)]
-##fig = plt.figure(figsize=(20,15))
-##xs = meltingRateCrit
-##ys = maxSWEcrit
-##plt.scatter(xs, ys)
-##plt.title('criteria for best combos')
-##plt.xlabel('delta_maxSWE (mm)',fontsize=40)
-##plt.ylabel('delta_meltingRate (cm/day)',fontsize=40)
-##plt.savefig('SA2/'+'maxswe_meltinRateAvg')
-##%%
-##coldcontentcrit_df = pd.DataFrame(coldcontentcrit, columns=['coldContent'])
-#meltingRateCrit_df = pd.DataFrame(meltingRateCrit, columns=['meltingRate'])
-#maxSWECrit_df = pd.DataFrame(maxSWEcrit, columns=['maxSWE'])
-#swe2bmaxCrit_df = pd.DataFrame(swe2bmaxCrit, columns=['swe2bmaxCrit'])
-#swe3bmaxCrit_df = pd.DataFrame(swe3bmaxCrit, columns=['swe3bmaxCrit'])
-#
-#criteria_df = pd.concat([meltingRateCrit_df, maxSWECrit_df, swe2bmaxCrit_df, swe3bmaxCrit_df], axis=1) #coldcontentcrit_df, 
-#criteria_df.set_index(hru_names_df[0],inplace=True)
-#Apareto_model_param0 = pd.DataFrame(criteria_df.index[((criteria_df['maxSWE']) <= 5) & ((criteria_df['meltingRate'])<=0.03)].tolist()) # & ((criteria_df['coldContent'])<=7)
-#
-#Apareto_model_param1 = pd.DataFrame(criteria_df.index[((criteria_df['maxSWE']) <= 38.99) & ((criteria_df['swe2bmaxCrit']) <= 72.1) & ((criteria_df['swe3bmaxCrit']) <= 72.1) & ((criteria_df['meltingRate'])<=0.1)].tolist()) # & ((criteria_df['coldContent'])<=7)
-#Area = 291 * 10000 #m2
-#residualMax = 0.45
-#sweVol = Area * residualMax ; print sweVol
-##%%
-#DateSa2 = date(av_all,"%Y-%m-%d")
-#sax = np.arange(0,np.size(DateSa2))
-#sa_xticks = DateSa2
-#safig, saax = plt.subplots(1,1, figsize=(20,15))
-#plt.xticks(sax, sa_xticks[::1000], rotation=25, fontsize=20)
-#saax.xaxis.set_major_locator(ticker.AutoLocator())
-#plt.yticks(fontsize=20)
-#for hru in Apareto_model_param1[0]:
-#    plt.plot(av_swe_df[hru])
-#plt.plot(swe_obs2006, 'ok', markersize=15)
-##plt.legend()
-#plt.savefig('ccs/'+'best_combo1')
-##%% **************************************************************************************************
-### ************************** calculating cold content ************************************************
-###observed cold content in each day
-#
-#
-#ax2 = saax.twinx()  # instantiate a second axes that shares the same x-axis
 
-ax2.plot(av_swe_df[hru_names_df[0][0]].index,av_sd_df['10000stp'], linewidth=4, color = 'red')
-ax2.plot(av_swe_df[hru_names_df[0][0]].index,av_sd_df['10000stp102'], linewidth=4, color = 'orange')
-
-ax2.plot(snowdepth_obs_df2.index, snowdepth_obs_df2['observed_snowdepth'], linewidth=3, color = 'black')
-
-ax2.tick_params(axis='y')
-ax2.legend('snow depth', fontsize = 30)#, loc = 'upper left'
-ax2.set_ylabel('Snow depth', fontsize=40)
-ax2.set_yticklabels([0,0.5,1,1.5,2,2.5,3], fontsize=40)
-
-#ax2.xaxis.set_major_locator(ticker.AutoLocator())
-
-#
-#
-#
-#
 #
 #
 #
