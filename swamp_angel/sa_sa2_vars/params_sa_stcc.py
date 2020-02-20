@@ -38,20 +38,29 @@ def param_fill(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15,
     return(p1l, p2l, p3l, p4l, p5l, p6l, p7l, p8l, p9l, p10l, p11l, p12l, p13l, p14l, p15l, p16l, p17l)# , p18l 
 
 #%%  all parameters
-with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa2_bestSweSD/STAR_out_P12_stcc1.csv") as safd:
+with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa2_bestSweSD/STAR_out_P13_233_L_lstCC.csv") as safd:
     reader = csv.reader(safd)
     params0 = [r for r in reader]
 params1 = params0[1:]
 sa_fd_column = []
 for csv_counter1 in range (len (params1)):
-    for csv_counter2 in range (21):
+    for csv_counter2 in range (22):
         sa_fd_column.append(float(params1[csv_counter1][csv_counter2]))
-params_sa=np.reshape(sa_fd_column,(len (params1),21))
+params_sa=np.reshape(sa_fd_column,(len (params1),22))
 
 paramfile = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa2_bestSweSD/summa_zParamTrial_variableDecayRate_sa.nc",'w',format='NETCDF3_CLASSIC') #create new paramtrail.nc file
 
-hruidxID = [10033,10089,10209,10312,10327,10328,10330,10336,10338,10339,10349,10369,10371,
-            10375,10389,10410,10521,10523,10524,10526,10534,10544,10545,10590,10726]
+#hruidxID = [10317,10327,10336,10369,10375,10524,10526,10726] #p12
+hruidxID = [10030,10041,10042,10053,10054,10077,10078,10079,10081,10082,10083,10084,10085,10094,10095,
+            10096,10097,10098,10103,10104,10105,10106,10107,10108,10109,10110,10111,10112,10113,10114,
+            10115,10116,10117,10118,10119,10120,10122,10126,10156,10223,10224,10225,10234,10235,10336,
+            10337,10342,10348,10365,10379,10380,10381,10392,10393,10394,10398,10399,10400,10408,10409,
+            10410,10411,10412,10413,10414,10421,10423,10426,10427,10428,10429,10430,10431,10432,10433,
+            10436,10437,10438,10439,10440,10441,10442,10443,10444,10453,10454,10460,10461,10462,10617,
+            10625,10626,10628,10637,10650,10652,10653,10669,10670,10737,10749,10752,10756,10767,10768,
+            10769,10788,10790,10794,10795,10796,10825,10826,10827,10833,10834,10835,10836,10837,10841,
+            10850,10865,10866,10867,10879,10880,10881,10882,10883,10884,10885,10886,10887,10888,10904,
+            10910,10911,10912,10942,10945,10948,10951,10958,10959,10960,11272,11273,11274]
 hru_num = np.size(hruidxID)
 
 #%% #create new paramtrail.nc file and adding vaiables to it --- summa_zParamTrial_variableDecayRate_test
@@ -62,7 +71,7 @@ hidx = paramfile.createVariable('hruIndex', np.float64,('hru',)) # add hruIndex 
 param_nam_list = ['LAIMIN','LAIMAX','winterSAI','summerLAI','rootingDepth','heightCanopyTop','heightCanopyBottom',
                   'throughfallScaleSnow','newSnowDenMin','albedoDecayRate','albedoMaxVisible','albedoMinVisible',
                   'albedoMaxNearIR','albedoMinNearIR','albedoRefresh','albedoSootLoad',
-                  'Frad_vis','mw_exp','k_snow','critRichNumber','tempCritRain'] #,'fixedThermalCond_snow' 'frozenPrecipMultip'
+                  'Frad_vis','mw_exp','k_snow','critRichNumber','tempCritRain','fixedThermalCond_snow'] # 'frozenPrecipMultip'
 #	
 # call the function on the parameters
 #valst1 = param_fill(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17) #,p18 

@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import itertools
 import csv
 #%% hru names
-hruidxID = list(np.arange(10000,11065))  #12180
+hruidxID = list(np.arange(10000,11275))  #12180
 hru_num = np.size(hruidxID)
 
 #%% #Swamp Angel forcing data

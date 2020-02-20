@@ -291,30 +291,50 @@ snowdepth_obs_df2 = pd.DataFrame(sa_sd_obs, columns = ['observed_snowdepth'])
 indx_sd = np.arange(0,16056,24)
 snowdepth_obs_df2.set_index(indx_sd,inplace=True)
 #%% defining hrus_name
-hruidxID = list(np.arange(10000,11065))    
-hru_num = np.size(hruidxID)
+hruidxID12p = list(np.arange(10000,11065))    
+hru_num12p = np.size(hruidxID12p)
 years = ['2007','2008']#
-out_names = ["ljh","ljp","ljc","ltc","lth","ltp"]#,"sth","stc","sjc","sjp"
+out_names12p = ["ljh","ljp","ljc","lth","ltp","ltc","sjh","sjp","sjc","sth","stp","stc"]#
                        
-paramModel = (np.size(out_names))*(hru_num)
-hru_names =[]
-for i in out_names:
-    hru_names.append(['{}{}'.format(j, i) for j in hruidxID])
-hru_names1 = np.reshape(hru_names,(paramModel,1))
-hru_names_df = pd.DataFrame (hru_names1)
+paramModel12p = (np.size(out_names12p))*(hru_num12p)
+hru_names12p =[]
+for i in out_names12p:
+    hru_names12p.append(['{}{}'.format(j, i) for j in hruidxID12p])
+hru_names112p = np.reshape(hru_names12p,(paramModel12p,1))
+hru_names_df12p = pd.DataFrame (hru_names112p)
 
+
+hruidxID13p = list(np.arange(10000,11275))    
+hru_num13p = np.size(hruidxID13p)
+out_names13p = ["lsc"]#
+                       
+paramModel13p = (np.size(out_names13p))*(hru_num13p)
+hru_names13p =[]
+for i in out_names13p:
+    hru_names13p.append(['{}{}'.format(j, i) for j in hruidxID13p])
+hru_names113p = np.reshape(hru_names13p,(paramModel13p,1))
+hru_names_df13p = pd.DataFrame (hru_names113p)
+
+hru_names_df = pd.concat([hru_names_df12p,hru_names_df13p], ignore_index = 'True')
 #%%  reading output files
 from allNcFiles_sa2 import av_ncfiles
+from allNcFiles_sa2 import av_ncfiles13p
 
 av_all = readAllNcfilesAsDataset(av_ncfiles)
+av_all13p = readAllNcfilesAsDataset(av_ncfiles13p)
+
 #DateSa2007 = date(av_all[0],"%Y-%m-%d %H:%M")
 #DateSa2008 = date(av_all[1],"%Y-%m-%d %H:%M")
 
 #av_swe_df = readVariablefromMultipleNcfilesDatasetasDF40neYear(av_all,'scalarSWE',hru_names_df,hruidxID,out_names)
+av_sd_df12p = readVariablefromMultipleNcfilesDatasetasDF(av_all,'scalarSnowDepth',hru_names_df12p,hruidxID12p,out_names12p)
+av_swe_df12p = readVariablefromMultipleNcfilesDatasetasDF(av_all,'scalarSWE',hru_names_df12p,hruidxID12p,out_names12p)
 
-av_sd_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'scalarSnowDepth',hru_names_df,hruidxID,out_names)
-av_swe_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'scalarSWE',hru_names_df,hruidxID,out_names)
+av_sd_df13p = readVariablefromMultipleNcfilesDatasetasDF(av_all13p,'scalarSnowDepth',hru_names_df13p,hruidxID13p,out_names13p)
+av_swe_df13p = readVariablefromMultipleNcfilesDatasetasDF(av_all13p,'scalarSWE',hru_names_df13p,hruidxID13p,out_names13p)
 
+av_sd_df = pd.concat([av_sd_df12p,av_sd_df13p], axis = 1)
+av_swe_df = pd.concat([av_swe_df12p,av_swe_df13p], axis = 1)
 
 #%% ploting annual swe curves 
 
@@ -340,7 +360,7 @@ sa_xticks = date_sa
 plt.xticks(sax[::3000], sa_xticks[::3000], rotation=25, fontsize=40)# 
 
 safig.tight_layout()  # otherwise the right y-label is slightly clipped
-plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/sa_sa2_swe_6c_lastP.png')
+plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/sa_sa2_swe_6c_lastP_12pC_13p1.png')
 
 #%% ploting snow depth 
 safig2, saax2 = plt.subplots(1,1, figsize=(30,20))#

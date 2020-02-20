@@ -38,15 +38,15 @@ def param_fill(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15,
     return(p1l, p2l, p3l, p4l, p5l, p6l, p7l, p8l, p9l, p10l, p11l, p12l, p13l, p14l, p15l, p16l, p17l)# , p18l 
 
 #%%  all parameters
-with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/STAR_out_P12_233_L.csv") as safd:
+with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/STAR_out_P13_233_L.csv") as safd:
     reader = csv.reader(safd)
     params0 = [r for r in reader]
 params1 = params0[1:]
 sa_fd_column = []
 for csv_counter1 in range (len (params1)):
-    for csv_counter2 in range (21):
+    for csv_counter2 in range (22):
         sa_fd_column.append(float(params1[csv_counter1][csv_counter2]))
-params_sa=np.reshape(sa_fd_column,(len (params1),21))
+params_sa=np.reshape(sa_fd_column,(len (params1),22))
 
 paramfile = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/summa_zParamTrial_variableDecayRate_sa_sa2.nc",'w',format='NETCDF3_CLASSIC') #create new paramtrail.nc file
 
@@ -61,7 +61,7 @@ hidx = paramfile.createVariable('hruIndex', np.float64,('hru',)) # add hruIndex 
 param_nam_list = ['LAIMIN','LAIMAX','winterSAI','summerLAI','rootingDepth','heightCanopyTop','heightCanopyBottom',
                   'throughfallScaleSnow','newSnowDenMin','albedoDecayRate','albedoMaxVisible','albedoMinVisible',
                   'albedoMaxNearIR','albedoMinNearIR','albedoRefresh','albedoSootLoad',
-                  'Frad_vis','mw_exp','k_snow','critRichNumber','tempCritRain'] #,'fixedThermalCond_snow' 'frozenPrecipMultip'
+                  'Frad_vis','mw_exp','k_snow','critRichNumber','tempCritRain','fixedThermalCond_snow'] # 'frozenPrecipMultip'
 #	
 # call the function on the parameters
 #valst1 = param_fill(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17) #,p18 

@@ -350,6 +350,10 @@ sst_obs_morn_df.index = snowdepth_obs_df.index[0:len(sst_obs_morn_df)]
 
 sst_obs_morn_df2 = pd.DataFrame(sst_obs_morn_df.values, columns = ['observed_snowSurfaceTemp_morning']) 
 sst_obs_morn_df2.set_index(indx_sd[0:622],inplace=True)
+
+sst_obs_morn2007_ablation_df = sst_obs_morn_df[0]['2007-04-18':'2007-05-23'] #perior_ablationPeriod = ['2007-04-18','2007-04-23','2007-05-02','2007-05-09','2007-05-16','2007-05-23']#,
+sst_obs_morn2008_ablation_df = sst_obs_morn_df[0]['2008-04-14':'2008-05-06'] #perior_ablationPeriod = ['2008-04-14 14:45','2008-04-22 12:30','2008-04-28 12:30','2008-05-06 09:15']#,
+sst_obs_morn_ablation_df = pd.concat([sst_obs_morn2007_ablation_df,sst_obs_morn2008_ablation_df])
 #%% calculated cold content from observation data
 coldContent_obs = [0.2659,1.6621,2.3153,3.5530,3.7742,2.8175,1.0309,0.31845,0,0.2134,0.0015,0,0.0464,
                    0,0.0155,0,0,0.9618,3.2154,5.4645,5.0077,4.6845,2.7450,1.9861,0.37033,0.0833,0,0,0,
@@ -374,10 +378,6 @@ hru_names_df = pd.DataFrame (hru_names1)
 from allNcFiles_sa2_stcc import av_ncfiles
 
 av_all = readAllNcfilesAsDataset(av_ncfiles)
-#DateSa2007 = date(av_all[0],"%Y-%m-%d %H:%M")
-#DateSa2008 = date(av_all[1],"%Y-%m-%d %H:%M")
-
-#av_swe_df = readVariablefromMultipleNcfilesDatasetasDF40neYear(av_all,'scalarSWE',hru_names_df,hruidxID,out_names)
 
 av_sd_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'scalarSnowDepth',hru_names_df,hruidxID,out_names)
 av_swe_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'scalarSWE',hru_names_df,hruidxID,out_names)
@@ -386,6 +386,8 @@ av_st_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'scalarSurfaceTemp'
 av_sst_date = np.append(date(av_all[0],"%Y-%m-%d %H:%M"),date(av_all[1],"%Y-%m-%d %H:%M"))
 av_st_df.index = av_sst_date
 av_st_df2 =pd.DataFrame(av_st_df.values, columns=av_st_df.columns)
+
+# snow surface temp in the morning
 av_st_morn_df = pd.DataFrame((av_st_df[:]['2006-10-01 03:00':'2008-06-13 04:00':24].values+
                               av_st_df[:]['2006-10-01 04:00':'2008-06-13 05:00':24].values+
                               av_st_df[:]['2006-10-01 05:00':'2008-06-13 06:00':24].values+
@@ -393,11 +395,13 @@ av_st_morn_df = pd.DataFrame((av_st_df[:]['2006-10-01 03:00':'2008-06-13 04:00':
 av_st_morn_df.index = snowdepth_obs_df.index[0:len(sst_obs_morn_df)]
 av_st_morn_df2 = pd.DataFrame(av_st_morn_df.values, columns=av_st_df2.columns)
 av_st_morn_df2.set_index(sst_obs_morn_df2.index,inplace=True)
-#modeled cold content
-#number of snow layer
+
+#%%calculating modeled cold content
+#number of snow layer for dates of observed swe
 av_nsl_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'nSnow',hru_names_df,hruidxID,out_names)
 nsnow = [av_nsl_df.values[ns,1:] for ns in obs_swe_ind]
-# snow layers temperature
+
+# snow layers temperature for dates of observed swe
 av_mlt_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'mLayerTemp',hru_names_df,hruidxID,out_names)
 sum0flayers0 = []
 for ns in obs_swe_ind:
@@ -420,7 +424,7 @@ for ns in obs_swe_ind:
 layerTemp4dates = readData4multibleLayers4specificDateofAvailableSWE(av_mlt_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
 snowLayerTemp4dates = readData4multibleSnowLayers4specificDateofAvailableSWE(av_mlt_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
 
-#height of each layer
+#height of each layer for dates of observed swe
 av_mld_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'mLayerDepth',hru_names_df,hruidxID,out_names)
 layerDepth4dates = readData4multibleLayers4specificDateofAvailableSWE(av_mld_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
 snowLayerDepth4dates = readData4multibleSnowLayers4specificDateofAvailableSWE(av_mld_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
@@ -434,7 +438,7 @@ for dates in range(len(obs_swe_ind)):
         snowLayerHeight_hru.append(snowLayerHeight)
     snowLayerHeight4dates.append(snowLayerHeight_hru)
 
-#volumetric fraction of ice and liquid    
+#volumetric fraction of ice and liquid for dates of observed swe   
 av_vfi_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'mLayerVolFracIce',hru_names_df,hruidxID,out_names)
 layerVolFracIce4dates = readData4multibleLayers4specificDateofAvailableSWE(av_vfi_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
 snowLayerVolFracIce4dates = readData4multibleSnowLayers4specificDateofAvailableSWE(av_vfi_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
@@ -443,21 +447,11 @@ av_vfl_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'mLayerVolFracLiq'
 layerVolFracLiq4dates = readData4multibleLayers4specificDateofAvailableSWE(av_vfl_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
 snowLayerVolFracLiq4dates = readData4multibleSnowLayers4specificDateofAvailableSWE(av_vfl_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
 
-#av_mlfls_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'mLayerFracLiqSnow',hru_names_df,hruidxID,out_names)
-#layerFracLiqSnw4dates = readData4multibleLayers4specificDateofAvailableSWE(av_mlfls_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
-#snowLayerFracLiqSnw4dates = readData4multibleSnowLayers4specificDateofAvailableSWE(av_mlfls_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
-
-#av_vfw_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'mLayerVolFracWat',hru_names_df,hruidxID,out_names)
-#layerVolFracWat4dates = readData4multibleLayers4specificDateofAvailableSWE(av_vfw_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
-#snowLayerVolFracWat4dates = readData4multibleSnowLayers4specificDateofAvailableSWE(av_vfw_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
-
-#volumetric fraction of ice and liquid    
+#volumetric heat capacity of snow layers for dates of observed swe  
 av_mlhci_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'mLayerVolHtCapBulk',hru_names_df,hruidxID,out_names)
 layerHeatCap4dates = readData4multibleLayers4specificDateofAvailableSWE(av_mlhci_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
 snowLayerHeatCap4dates = readData4multibleSnowLayers4specificDateofAvailableSWE(av_mlhci_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
 
-#av_test_df = readVariablefromMultipleNcfilesDatasetasDF(av_all,'mLayerPoreSpace',hru_names_df,hruidxID,out_names)
-#test4dates = readData4multibleLayers4specificDateofAvailableSWE(av_test_df,obs_swe_ind,hru_names_df,sum0flayers0,sum0flayers1)
 
 #coldContentCalculation
 densityofWater = 997. #kg/m³
@@ -471,11 +465,43 @@ for dates in range(len(obs_swe_ind)):
         temp = snowLayerTemp4dates[dates][hrus] - 273.15
         HCItHS = snowLayerHeatCap4dates[dates][hrus] * snowLayerHeight4dates[dates][hrus]
         cct = sum(list(swe*temp*HCItHS/1000000.)) #MJ m-3 K-1
-        cct_hru.append(cct)
+        cct_hru.append(abs(cct))
     coldcontent4Dates.append(cct_hru)
 
+#%% ploting snow surface temperature 
+DateSa21 = date(av_all[0],"%Y-%m-%d") #"%Y-%m-%d %H:%M"
+DateSa22 = date(av_all[1],"%Y-%m-%d")
+date_sa = np.append(DateSa21,DateSa22)
+sax = np.arange(0,np.size(date_sa))
+sa_xticks = date_sa
+
+safig3, saax3 = plt.subplots(1,1, figsize=(30,20))#
+for hru3 in range (len(hru_names_df[0])):#
+    plt.plot(av_st_df2[hru_names_df[0][hru3]]-273.15, linewidth=4)
+
+plt.plot(sst_obs_df2['observed_snowSurfaceTemp'], 'k')#, linewidth=6[0:16], markersize=15
+plt.yticks(fontsize=40)
+plt.xlabel('Time 2006-2008', fontsize=40)
+saax3.set_ylabel('snow surface temperature (C)', fontsize=40)
+plt.xticks(sax[::3000], sa_xticks[::3000], rotation=25, fontsize=40)# 
+safig3.tight_layout()  
+plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa2_bestSweSD/sa_sa2_sst_4c_lastP_sst1.png')
+
+
+safig4, saax4 = plt.subplots(1,1, figsize=(30,20))#
+for hru4 in range (len(hru_names_df[0])):#
+    plt.scatter(av_st_morn_df2.index,av_st_morn_df2[hru_names_df[0][hru4]]-273.15, s = 500)#, linewidth=4
+
+plt.scatter(sst_obs_morn_df2.index, sst_obs_morn_df2['observed_snowSurfaceTemp_morning'], c = 'k', s =500)#, linewidth=4[0:16], markersize=15
+plt.yticks(fontsize=40)
+plt.xlabel('Time 2006-2008', fontsize=40)
+saax4.set_ylabel('snow surface temperature at before sunrise (C)', fontsize=40)
+plt.xticks(sax[::2000], sa_xticks[::2000], rotation=25, fontsize=40)# 
+safig4.tight_layout()  # otherwise the right y-label is slightly clipped
+plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa2_bestSweSD/sa_sa2_sst5am_4c_lastP_sst1_scatter.png')
+
 #%% ploting annual swe curves 
-DateSa21 = date(av_all[0],"%Y-%m-%d")
+DateSa21 = date(av_all[0],"%Y-%m-%d") #"%Y-%m-%d %H:%M"
 DateSa22 = date(av_all[1],"%Y-%m-%d")
 date_sa = np.append(DateSa21,DateSa22)
 #av_swe_df.index = date_sa
@@ -515,34 +541,9 @@ plt.xticks(sax[::3000], sa_xticks[::3000], rotation=25, fontsize=40)#
 
 safig2.tight_layout()  # otherwise the right y-label is slightly clipped
 plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa2_bestSweSD/sa_sa2_sd_4c_lastP_stcc1.png')
-#%% snow surface temperature 
-safig3, saax3 = plt.subplots(1,1, figsize=(30,20))#
-for hru3 in range (len(hru_names_df[0])):#
-    plt.plot(av_st_df2[hru_names_df[0][hru3]]-273.15, linewidth=4)
 
-plt.plot(sst_obs_df2['observed_snowSurfaceTemp'], 'k')#, linewidth=6[0:16], markersize=15
-plt.yticks(fontsize=40)
-plt.xlabel('Time 2006-2008', fontsize=40)
-saax3.set_ylabel('snow surface temperature (C)', fontsize=40)
-plt.xticks(sax[::3000], sa_xticks[::3000], rotation=25, fontsize=40)# 
-safig3.tight_layout()  
-plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa2_bestSweSD/sa_sa2_sst_4c_lastP_stcc1.png')
-
-
-safig4, saax4 = plt.subplots(1,1, figsize=(30,20))#
-for hru4 in range (len(hru_names_df[0])):#
-    plt.plot(av_st_morn_df2[hru_names_df[0][hru4]]-273.15, linewidth=4)
-
-plt.plot(sst_obs_morn_df2.index, sst_obs_morn_df2['observed_snowSurfaceTemp_morning'], 'k', linewidth=4)#[0:16], markersize=15
-plt.yticks(fontsize=40)
-plt.xlabel('Time 2006-2008', fontsize=40)
-saax4.set_ylabel('snow surface temperature at before sunrise (C)', fontsize=40)
-plt.xticks(sax[::2000], sa_xticks[::2000], rotation=25, fontsize=40)# 
-safig4.tight_layout()  # otherwise the right y-label is slightly clipped
-plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa2_bestSweSD/sa_sa2_sst5am_4c_lastP_stcc1.png')
 
 #%% day of snow disappearance (based on snowdepth)-final output
-
 dosd_df2007, dosd_residual_df2007 = calculatingSDD(av_sd_df[:][5000:8737],hru_names_df,5976,'2007',3737,5000)
 dosd_df2008, dosd_residual_df2008 = calculatingSDD(av_sd_df[:][14000:],hru_names_df,15000,'2008',3521,14000)
 
@@ -711,35 +712,43 @@ dosd_residual_df_sum_r_bestSWE_bestMR = dosd_residual_df_sum_r[ind_df_mean_perc_
 ind_df_mean_perc_bestSWE_bestMR_bestSDD = (dosd_residual_df_sum_r_bestSWE_bestMR[dosd_residual_df_sum_r_bestSWE_bestMR<=11]).index
 
 #%% snow surface temp obj func.
-sst_obs_morn_2007 = sst_obs_morn_df['2007-03-20':'2007-05-15']
-sst_obs_morn_2008 = sst_obs_morn_df['2008-04-01':'2008-05-15']
 
-av_st_morn_2007 = av_st_morn_df['2007-03-20':'2007-05-15']-273.15
-av_st_morn_2008 = av_st_morn_df['2008-04-01':'2008-05-15']-273.15
+#%% snow surface temp morning objective function
+sst_morn2007_ablation_df = av_st_morn_df['2007-04-18':'2007-05-23'] #perior_ablationPeriod = ['2007-04-18','2007-04-23','2007-05-02','2007-05-09','2007-05-16','2007-05-23']#,
+sst_morn2008_ablation_df = av_st_morn_df[:]['2008-04-14':'2008-05-06'] #perior_ablationPeriod = ['2008-04-14 14:45','2008-04-22 12:30','2008-04-28 12:30','2008-05-06 09:15']#,
+sst_morn_ablation_df = pd.concat([sst_morn2007_ablation_df,sst_morn2008_ablation_df])
+sst_morn_ablation_df.drop(0, axis = 'columns', inplace = True)
 
-delta_sst_morn2007 = abs(av_st_morn_2007.values[:,1:] - sst_obs_morn_2007.values)/abs(sst_obs_morn_2007.values)
-delta_sst_morn2008 = abs(av_st_morn_2008.values[:,1:] - sst_obs_morn_2008.values)/abs(sst_obs_morn_2008.values)
+sst_morn_ablation_residual = abs(sst_morn_ablation_df.subtract((sst_obs_morn_ablation_df+273.15), axis = 0))
+sst_morn_ablation_residual_mean_df = pd.DataFrame(np.mean(sst_morn_ablation_residual, axis = 0))
+sst_morn_ablation_residual_mean_df.index = hru_names_df[0]
 
-delta_sst_morn2007_perc = np.sum(delta_sst_morn2007,axis =0)/len(delta_sst_morn2007)
-delta_sst_morn2008_perc = np.sum(delta_sst_morn2008,axis =0)/len(delta_sst_morn2008)
+sst_obs_morn_ablation_mean = abs(np.mean(sst_obs_morn_ablation_df, axis =0))
 
-delta_sst_morn_perc = (delta_sst_morn2007_perc + delta_sst_morn2007_perc)/2. 
-delta_sst_morn_perc_df = pd.DataFrame(delta_sst_morn_perc)
-delta_sst_morn_perc_df.index = hru_names_df[0]
+sst_morn_ablation_delta_mean_df_perc = sst_morn_ablation_residual_mean_df/sst_obs_morn_ablation_mean
 
-delta_sst_df_sum_r_bestSWE_bestMR_bestSDD = delta_sst_morn_perc_df[0][ind_df_mean_perc_bestSWE_bestMR_bestSDD]
-ind_df_mean_perc_bestSWE_bestMR_bestSDD_bestSST = (delta_sst_df_sum_r_bestSWE_bestMR_bestSDD[delta_sst_df_sum_r_bestSWE_bestMR_bestSDD<=0.25]).index
+#sst_obs_morn_2007 = sst_obs_morn_df['2007-03-20':'2007-05-15']
+#sst_obs_morn_2008 = sst_obs_morn_df['2008-04-01':'2008-05-15']
+#
+#av_st_morn_2007 = av_st_morn_df['2007-03-20':'2007-05-15']-273.15
+#av_st_morn_2008 = av_st_morn_df['2008-04-01':'2008-05-15']-273.15
+#
+#delta_sst_morn2007 = abs(av_st_morn_2007.values[:,1:] - sst_obs_morn_2007.values)/abs(sst_obs_morn_2007.values)
+#delta_sst_morn2008 = abs(av_st_morn_2008.values[:,1:] - sst_obs_morn_2008.values)/abs(sst_obs_morn_2008.values)
+#
+#delta_sst_morn2007_perc = np.sum(delta_sst_morn2007,axis =0)/len(delta_sst_morn2007)
+#delta_sst_morn2008_perc = np.sum(delta_sst_morn2008,axis =0)/len(delta_sst_morn2008)
+#
+#delta_sst_morn_perc = (delta_sst_morn2007_perc + delta_sst_morn2007_perc)/2. 
+#delta_sst_morn_perc_df = pd.DataFrame(delta_sst_morn_perc)
+#delta_sst_morn_perc_df.index = hru_names_df[0]
+
+delta_sst_df_mean_r_bestSWE_bestMR_bestSDD = sst_morn_ablation_delta_mean_df_perc[0][ind_df_mean_perc_bestSWE_bestMR_bestSDD]
+ind_df_mean_perc_bestSWE_bestMR_bestSDD_bestSST = (delta_sst_df_mean_r_bestSWE_bestMR_bestSDD[delta_sst_df_mean_r_bestSWE_bestMR_bestSDD<=0.25]).index
 
 #%%
 safig, saax = plt.subplots(1,1, figsize=(30,20))#
 color = []
-#for hru1 in range (len(dosd_residual_dfmin_indx)):
-#    plt.plot(av_swe_df[dosd_residual_dfmin_indx[hru1]],  'green', linewidth=4)#
-#for hru3 in range (len(hru_meltRater)):
-#    plt.plot(av_swe_df[hru_meltRater[hru3]], 'pink', linewidth=4)
-#for hru2 in range (len(hru_maxSWEr_r)):
-#    plt.plot(av_swe_df[hru_maxSWEr_r[hru2]], 'blue', linewidth=4)#'green', 
-
 
 for hru in ind_df_mean_perc_bestSWE_bestMR_bestSDD_bestSST:
     #print hru
@@ -768,7 +777,7 @@ plt.xlabel('Time 2006-2008', fontsize=40)
 saax4.set_ylabel('snow surface temperature at before sunrise (C)', fontsize=40)
 plt.xticks(sax[::2000], sa_xticks[::2000], rotation=25, fontsize=40)# 
 safig4.tight_layout()  # otherwise the right y-label is slightly clipped
-plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa2_bestSweSD/sa_sa2_sst5am_4c_lastP_bestSWEMrSST.png')
+plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa2_bestSweSD/sa_sa2_sst5am_4c_lastP_bestSWEMrSST_scatter.png')
 
 
 #%%
