@@ -575,80 +575,79 @@ sax = np.arange(0,np.size(date_sa))
 sa_xticks = date_sa
 
 # calculating historical swe, sd, and 50%input
-
 av_sd_df_h_lsc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lsc'][0]),hruid_swe_dic['lsc'],['lsc'],0)
 av_sd_df_h_lsh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lsh'][0]),hruid_swe_dic['lsh'],['lsh'],1)
-av_sd_df_h_lsh.drop(['counter'], axis = 1)
+av_sd_df_h_lsh.drop(['counter'], axis = 1, inplace = True)
 av_sd_df_h_lsp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lsp'][0]),hruid_swe_dic['lsp'],['lsp'],2)
-av_sd_df_h_lsp.drop(['counter'], axis = 1)
+av_sd_df_h_lsp.drop(['counter'], axis = 1, inplace = True)
 av_sd_df_h_ssc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssc'][0]),hruid_swe_dic['ssc'],['ssc'],3)
-av_sd_df_h_ssc.drop(['counter'], axis = 1)
-av_sd_df_h_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],3)
-av_sd_df_h_ssh.drop(['counter'], axis = 1)
-av_sd_df_h_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],4)
-av_sd_df_h_ssp.drop(['counter'], axis = 1)
-av_sd_df_h_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],5)
-av_sd_df_h_ljc.drop(['counter'], axis = 1)
-av_sd_df_h_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],6)
-av_sd_df_h_ljp.drop(['counter'], axis = 1)
-av_sd_df_h_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],7)
-av_sd_df_h_lth.drop(['counter'], axis = 1)
-av_sd_df_h_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],8)
-av_sd_df_h_sjh.drop(['counter'], axis = 1)
-av_sd_df_h_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],9)
-av_sd_df_h_sjp.drop(['counter'], axis = 1)
-av_sd_df_h_stp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['stp'][0]),hruid_swe_dic['stp'],['stp'],9)
-av_sd_df_h_stp.drop(['counter'], axis = 1)
+av_sd_df_h_ssc.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_h_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],4)
+av_sd_df_h_ssh.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_h_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],5)
+av_sd_df_h_ssp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_h_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],6)
+av_sd_df_h_ljc.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_h_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],7)
+av_sd_df_h_ljp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_h_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],8)
+av_sd_df_h_lth.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_h_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],9)
+av_sd_df_h_sjh.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_h_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],10)
+av_sd_df_h_sjp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_h_stp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['stp'][0]),hruid_swe_dic['stp'],['stp'],11)
+av_sd_df_h_stp.drop(['counter'], axis = 1, inplace = True)
 av_sd_df_h = pd.concat([av_sd_df_h_lsc,av_sd_df_h_lsh,av_sd_df_h_lsp,av_sd_df_h_ssc,av_sd_df_h_ssh,av_sd_df_h_ssp,av_sd_df_h_ljc,av_sd_df_h_ljp,av_sd_df_h_lth,av_sd_df_h_sjh,av_sd_df_h_sjp,av_sd_df_h_stp], axis = 1)
 
 av_swe_df_h_lsc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lsc'][0]),hruid_swe_dic['lsc'],['lsc'],0)
 av_swe_df_h_lsh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lsh'][0]),hruid_swe_dic['lsh'],['lsh'],1)
-av_swe_df_h_lsh.drop(['counter'], axis = 1)
+av_swe_df_h_lsh.drop(['counter'], axis = 1, inplace = True)
 av_swe_df_h_lsp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lsp'][0]),hruid_swe_dic['lsp'],['lsp'],2)
-av_swe_df_h_lsp.drop(['counter'], axis = 1)
+av_swe_df_h_lsp.drop(['counter'], axis = 1, inplace = True)
 av_swe_df_h_ssc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssc'][0]),hruid_swe_dic['ssc'],['ssc'],3)
-av_swe_df_h_ssc.drop(['counter'], axis = 1)
-av_swe_df_h_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],3)
-av_swe_df_h_ssh.drop(['counter'], axis = 1)
-av_swe_df_h_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],4)
-av_swe_df_h_ssp.drop(['counter'], axis = 1)
-av_swe_df_h_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],5)
-av_swe_df_h_ljc.drop(['counter'], axis = 1)
-av_swe_df_h_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],6)
-av_swe_df_h_ljp.drop(['counter'], axis = 1)
-av_swe_df_h_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],7)
-av_swe_df_h_lth.drop(['counter'], axis = 1)
-av_swe_df_h_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],8)
-av_swe_df_h_sjh.drop(['counter'], axis = 1)
-av_swe_df_h_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],9)
-av_swe_df_h_sjp.drop(['counter'], axis = 1)
-av_swe_df_h_stp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['stp'][0]),hruid_swe_dic['stp'],['stp'],9)
-av_swe_df_h_stp.drop(['counter'], axis = 1)
+av_swe_df_h_ssc.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_h_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],4)
+av_swe_df_h_ssh.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_h_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],5)
+av_swe_df_h_ssp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_h_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],6)
+av_swe_df_h_ljc.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_h_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],7)
+av_swe_df_h_ljp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_h_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],8)
+av_swe_df_h_lth.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_h_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],9)
+av_swe_df_h_sjh.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_h_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],10)
+av_swe_df_h_sjp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_h_stp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarSWE',pd.DataFrame(hru_names_dic_swe['stp'][0]),hruid_swe_dic['stp'],['stp'],11)
+av_swe_df_h_stp.drop(['counter'], axis = 1, inplace = True)
 av_swe_df_h = pd.concat([av_swe_df_h_lsc,av_swe_df_h_lsh,av_swe_df_h_lsp,av_swe_df_h_ssc,av_swe_df_h_ssh,av_swe_df_h_ssp,av_swe_df_h_ljc,av_swe_df_h_ljp,av_swe_df_h_lth,av_swe_df_h_sjh,av_swe_df_h_sjp,av_swe_df_h_stp], axis = 1)
 
 av_rPm_df_h_lsc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lsc'][0]),hruid_swe_dic['lsc'],['lsc'],0)
 av_rPm_df_h_lsh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lsh'][0]),hruid_swe_dic['lsh'],['lsh'],1)
-av_rPm_df_h_lsh.drop(['counter'], axis = 1)
+av_rPm_df_h_lsh.drop(['counter'], axis = 1, inplace = True)
 av_rPm_df_h_lsp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lsp'][0]),hruid_swe_dic['lsp'],['lsp'],2)
-av_rPm_df_h_lsp.drop(['counter'], axis = 1)
+av_rPm_df_h_lsp.drop(['counter'], axis = 1, inplace = True)
 av_rPm_df_h_ssc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssc'][0]),hruid_swe_dic['ssc'],['ssc'],3)
-av_rPm_df_h_ssc.drop(['counter'], axis = 1)
-av_rPm_df_h_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],3)
-av_rPm_df_h_ssh.drop(['counter'], axis = 1)
-av_rPm_df_h_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],4)
-av_rPm_df_h_ssp.drop(['counter'], axis = 1)
-av_rPm_df_h_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],5)
-av_rPm_df_h_ljc.drop(['counter'], axis = 1)
-av_rPm_df_h_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],6)
-av_rPm_df_h_ljp.drop(['counter'], axis = 1)
-av_rPm_df_h_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],7)
-av_rPm_df_h_lth.drop(['counter'], axis = 1)
-av_rPm_df_h_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],8)
-av_rPm_df_h_sjh.drop(['counter'], axis = 1)
-av_rPm_df_h_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],9)
-av_rPm_df_h_sjp.drop(['counter'], axis = 1)
-av_rPm_df_h_stp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['stp'][0]),hruid_swe_dic['stp'],['stp'],9)
-av_rPm_df_h_stp.drop(['counter'], axis = 1)
+av_rPm_df_h_ssc.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_h_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],4)
+av_rPm_df_h_ssh.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_h_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],5)
+av_rPm_df_h_ssp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_h_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],6)
+av_rPm_df_h_ljc.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_h_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],7)
+av_rPm_df_h_ljp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_h_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],8)
+av_rPm_df_h_lth.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_h_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],9)
+av_rPm_df_h_sjh.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_h_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],10)
+av_rPm_df_h_sjp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_h_stp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_h,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['stp'][0]),hruid_swe_dic['stp'],['stp'],11)
+av_rPm_df_h_stp.drop(['counter'], axis = 1, inplace = True)
 av_rPm_df_h = pd.concat([av_rPm_df_h_lsc,av_rPm_df_h_lsh,av_rPm_df_h_lsp,av_rPm_df_h_ssc,av_rPm_df_h_ssh,av_rPm_df_h_ssp,av_rPm_df_h_ljc,av_rPm_df_h_ljp,av_rPm_df_h_lth,av_rPm_df_h_sjh,av_rPm_df_h_sjp,av_rPm_df_h_stp], axis = 1)
 
 #hru_names_df_swe_mr_sst_cc
@@ -697,66 +696,78 @@ av_all_T = readAllNcfilesAsDataset(av_ncfiles_T)
 # calculating swe, sd, and 50%input
 av_sd_df_T_lsc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lsc'][0]),hruid_swe_dic['lsc'],['lsc'],0)
 av_sd_df_T_lsh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lsh'][0]),hruid_swe_dic['lsh'],['lsh'],1)
-av_sd_df_T_lsh.drop(['counter'], axis = 1)
+av_sd_df_T_lsh.drop(['counter'], axis = 1, inplace = True)
 av_sd_df_T_lsp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lsp'][0]),hruid_swe_dic['lsp'],['lsp'],2)
-av_sd_df_T_lsp.drop(['counter'], axis = 1)
-av_sd_df_T_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],3)
-av_sd_df_T_ssh.drop(['counter'], axis = 1)
-av_sd_df_T_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],4)
-av_sd_df_T_ssp.drop(['counter'], axis = 1)
-av_sd_df_T_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],5)
-av_sd_df_T_ljc.drop(['counter'], axis = 1)
-av_sd_df_T_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],6)
-av_sd_df_T_ljp.drop(['counter'], axis = 1)
-av_sd_df_T_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],7)
-av_sd_df_T_lth.drop(['counter'], axis = 1)
-av_sd_df_T_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],8)
-av_sd_df_T_sjh.drop(['counter'], axis = 1)
-av_sd_df_T_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],9)
-av_sd_df_T_sjp.drop(['counter'], axis = 1)
-av_sd_df_T = pd.concat([av_sd_df_T_lsc,av_sd_df_T_lsh,av_sd_df_T_lsp,av_sd_df_T_ssh,av_sd_df_T_ssp,av_sd_df_T_ljc,av_sd_df_T_ljp,av_sd_df_T_lth,av_sd_df_T_sjh,av_sd_df_T_sjp], axis = 1)
+av_sd_df_T_lsp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_ssc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssc'][0]),hruid_swe_dic['ssc'],['ssc'],3)
+av_sd_df_T_ssc.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],4)
+av_sd_df_T_ssh.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],5)
+av_sd_df_T_ssp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],6)
+av_sd_df_T_ljc.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],7)
+av_sd_df_T_ljp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],8)
+av_sd_df_T_lth.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],9)
+av_sd_df_T_sjh.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],10)
+av_sd_df_T_sjp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_stp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['stp'][0]),hruid_swe_dic['stp'],['stp'],11)
+av_sd_df_T_stp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T = pd.concat([av_sd_df_T_lsc,av_sd_df_T_lsh,av_sd_df_T_lsp,av_sd_df_T_ssc,av_sd_df_T_ssh,av_sd_df_T_ssp,av_sd_df_T_ljc,av_sd_df_T_ljp,av_sd_df_T_lth,av_sd_df_T_sjh,av_sd_df_T_sjp,av_sd_df_T_stp], axis = 1)
 
 av_swe_df_T_lsc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lsc'][0]),hruid_swe_dic['lsc'],['lsc'],0)
 av_swe_df_T_lsh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lsh'][0]),hruid_swe_dic['lsh'],['lsh'],1)
-av_swe_df_T_lsh.drop(['counter'], axis = 1)
+av_swe_df_T_lsh.drop(['counter'], axis = 1, inplace = True)
 av_swe_df_T_lsp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lsp'][0]),hruid_swe_dic['lsp'],['lsp'],2)
-av_swe_df_T_lsp.drop(['counter'], axis = 1)
-av_swe_df_T_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],3)
-av_swe_df_T_ssh.drop(['counter'], axis = 1)
-av_swe_df_T_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],4)
-av_swe_df_T_ssp.drop(['counter'], axis = 1)
-av_swe_df_T_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],5)
-av_swe_df_T_ljc.drop(['counter'], axis = 1)
-av_swe_df_T_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],6)
-av_swe_df_T_ljp.drop(['counter'], axis = 1)
-av_swe_df_T_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],7)
-av_swe_df_T_lth.drop(['counter'], axis = 1)
-av_swe_df_T_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],8)
-av_swe_df_T_sjh.drop(['counter'], axis = 1)
-av_swe_df_T_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],9)
-av_swe_df_T_sjp.drop(['counter'], axis = 1)
-av_swe_df_T = pd.concat([av_swe_df_T_lsc,av_swe_df_T_lsh,av_swe_df_T_lsp,av_swe_df_T_ssh,av_swe_df_T_ssp,av_swe_df_T_ljc,av_swe_df_T_ljp,av_swe_df_T_lth,av_swe_df_T_sjh,av_swe_df_T_sjp], axis = 1)
+av_swe_df_T_lsp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_ssc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssc'][0]),hruid_swe_dic['ssc'],['ssc'],3)
+av_swe_df_T_ssc.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],4)
+av_swe_df_T_ssh.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],5)
+av_swe_df_T_ssp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],6)
+av_swe_df_T_ljc.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],7)
+av_swe_df_T_ljp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],8)
+av_swe_df_T_lth.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],9)
+av_swe_df_T_sjh.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],10)
+av_swe_df_T_sjp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_stp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarSWE',pd.DataFrame(hru_names_dic_swe['stp'][0]),hruid_swe_dic['stp'],['stp'],11)
+av_swe_df_T_stp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T = pd.concat([av_swe_df_T_lsc,av_swe_df_T_lsh,av_swe_df_T_lsp,av_swe_df_T_ssc,av_swe_df_T_ssh,av_swe_df_T_ssp,av_swe_df_T_ljc,av_swe_df_T_ljp,av_swe_df_T_lth,av_swe_df_T_sjh,av_swe_df_T_sjp,av_swe_df_T_stp], axis = 1)
 
 av_rPm_df_T_lsc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lsc'][0]),hruid_swe_dic['lsc'],['lsc'],0)
 av_rPm_df_T_lsh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lsh'][0]),hruid_swe_dic['lsh'],['lsh'],1)
-av_rPm_df_T_lsh.drop(['counter'], axis = 1)
+av_rPm_df_T_lsh.drop(['counter'], axis = 1, inplace = True)
 av_rPm_df_T_lsp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lsp'][0]),hruid_swe_dic['lsp'],['lsp'],2)
-av_rPm_df_T_lsp.drop(['counter'], axis = 1)
-av_rPm_df_T_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],3)
-av_rPm_df_T_ssh.drop(['counter'], axis = 1)
-av_rPm_df_T_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],4)
-av_rPm_df_T_ssp.drop(['counter'], axis = 1)
-av_rPm_df_T_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],5)
-av_rPm_df_T_ljc.drop(['counter'], axis = 1)
-av_rPm_df_T_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],6)
-av_rPm_df_T_ljp.drop(['counter'], axis = 1)
-av_rPm_df_T_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],7)
-av_rPm_df_T_lth.drop(['counter'], axis = 1)
-av_rPm_df_T_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],8)
-av_rPm_df_T_sjh.drop(['counter'], axis = 1)
-av_rPm_df_T_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],9)
-av_rPm_df_T_sjp.drop(['counter'], axis = 1)
-av_rPm_df_T = pd.concat([av_rPm_df_T_lsc,av_rPm_df_T_lsh,av_rPm_df_T_lsp,av_rPm_df_T_ssh,av_rPm_df_T_ssp,av_rPm_df_T_ljc,av_rPm_df_T_ljp,av_rPm_df_T_lth,av_rPm_df_T_sjh,av_rPm_df_T_sjp], axis = 1)
+av_rPm_df_T_lsp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_ssc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssc'][0]),hruid_swe_dic['ssc'],['ssc'],3)
+av_rPm_df_T_ssc.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],4)
+av_rPm_df_T_ssh.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],5)
+av_rPm_df_T_ssp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],6)
+av_rPm_df_T_ljc.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],7)
+av_rPm_df_T_ljp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],8)
+av_rPm_df_T_lth.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],9)
+av_rPm_df_T_sjh.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],10)
+av_rPm_df_T_sjp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_stp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['stp'][0]),hruid_swe_dic['stp'],['stp'],11)
+av_rPm_df_T_stp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T = pd.concat([av_rPm_df_T_lsc,av_rPm_df_T_lsh,av_rPm_df_T_lsp,av_rPm_df_T_ssc,av_rPm_df_T_ssh,av_rPm_df_T_ssp,av_rPm_df_T_ljc,av_rPm_df_T_ljp,av_rPm_df_T_lth,av_rPm_df_T_sjh,av_rPm_df_T_sjp,av_rPm_df_T_stp], axis = 1)
 
 
 #  timing of 50 percent of annual input (melt + rain)
@@ -805,66 +816,78 @@ av_all_T_al = readAllNcfilesAsDataset(av_ncfiles_T_al)
 # calculating swe, sd, and 50%input
 av_sd_df_T_al_lsc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lsc'][0]),hruid_swe_dic['lsc'],['lsc'],0)
 av_sd_df_T_al_lsh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lsh'][0]),hruid_swe_dic['lsh'],['lsh'],1)
-av_sd_df_T_al_lsh.drop(['counter'], axis = 1)
+av_sd_df_T_al_lsh.drop(['counter'], axis = 1, inplace = True)
 av_sd_df_T_al_lsp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lsp'][0]),hruid_swe_dic['lsp'],['lsp'],2)
-av_sd_df_T_al_lsp.drop(['counter'], axis = 1)
-av_sd_df_T_al_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],3)
-av_sd_df_T_al_ssh.drop(['counter'], axis = 1)
-av_sd_df_T_al_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],4)
-av_sd_df_T_al_ssp.drop(['counter'], axis = 1)
-av_sd_df_T_al_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],5)
-av_sd_df_T_al_ljc.drop(['counter'], axis = 1)
-av_sd_df_T_al_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],6)
-av_sd_df_T_al_ljp.drop(['counter'], axis = 1)
-av_sd_df_T_al_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],7)
-av_sd_df_T_al_lth.drop(['counter'], axis = 1)
-av_sd_df_T_al_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],8)
-av_sd_df_T_al_sjh.drop(['counter'], axis = 1)
-av_sd_df_T_al_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],9)
-av_sd_df_T_al_sjp.drop(['counter'], axis = 1)
-av_sd_df_T_al = pd.concat([av_sd_df_T_al_lsc,av_sd_df_T_al_lsh,av_sd_df_T_al_lsp,av_sd_df_T_al_ssh,av_sd_df_T_al_ssp,av_sd_df_T_al_ljc,av_sd_df_T_al_ljp,av_sd_df_T_al_lth,av_sd_df_T_al_sjh,av_sd_df_T_al_sjp], axis = 1)
+av_sd_df_T_al_lsp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_ssc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssc'][0]),hruid_swe_dic['ssc'],['ssc'],3)
+av_sd_df_T_al_ssc.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],4)
+av_sd_df_T_al_ssh.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],5)
+av_sd_df_T_al_ssp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],6)
+av_sd_df_T_al_ljc.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],7)
+av_sd_df_T_al_ljp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],8)
+av_sd_df_T_al_lth.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],9)
+av_sd_df_T_al_sjh.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],10)
+av_sd_df_T_al_sjp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_stp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['stp'][0]),hruid_swe_dic['stp'],['stp'],11)
+av_sd_df_T_al_stp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al = pd.concat([av_sd_df_T_al_lsc,av_sd_df_T_al_lsh,av_sd_df_T_al_lsp,av_sd_df_T_al_ssc,av_sd_df_T_al_ssh,av_sd_df_T_al_ssp,av_sd_df_T_al_ljc,av_sd_df_T_al_ljp,av_sd_df_T_al_lth,av_sd_df_T_al_sjh,av_sd_df_T_al_sjp,av_sd_df_T_al_stp], axis = 1)
 
 av_swe_df_T_al_lsc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lsc'][0]),hruid_swe_dic['lsc'],['lsc'],0)
 av_swe_df_T_al_lsh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lsh'][0]),hruid_swe_dic['lsh'],['lsh'],1)
-av_swe_df_T_al_lsh.drop(['counter'], axis = 1)
+av_swe_df_T_al_lsh.drop(['counter'], axis = 1, inplace = True)
 av_swe_df_T_al_lsp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lsp'][0]),hruid_swe_dic['lsp'],['lsp'],2)
-av_swe_df_T_al_lsp.drop(['counter'], axis = 1)
-av_swe_df_T_al_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],3)
-av_swe_df_T_al_ssh.drop(['counter'], axis = 1)
-av_swe_df_T_al_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],4)
-av_swe_df_T_al_ssp.drop(['counter'], axis = 1)
-av_swe_df_T_al_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],5)
-av_swe_df_T_al_ljc.drop(['counter'], axis = 1)
-av_swe_df_T_al_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],6)
-av_swe_df_T_al_ljp.drop(['counter'], axis = 1)
-av_swe_df_T_al_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],7)
-av_swe_df_T_al_lth.drop(['counter'], axis = 1)
-av_swe_df_T_al_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],8)
-av_swe_df_T_al_sjh.drop(['counter'], axis = 1)
-av_swe_df_T_al_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],9)
-av_swe_df_T_al_sjp.drop(['counter'], axis = 1)
-av_swe_df_T_al = pd.concat([av_swe_df_T_al_lsc,av_swe_df_T_al_lsh,av_swe_df_T_al_lsp,av_swe_df_T_al_ssh,av_swe_df_T_al_ssp,av_swe_df_T_al_ljc,av_swe_df_T_al_ljp,av_swe_df_T_al_lth,av_swe_df_T_al_sjh,av_swe_df_T_al_sjp], axis = 1)
+av_swe_df_T_al_lsp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_ssc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssc'][0]),hruid_swe_dic['ssc'],['ssc'],3)
+av_swe_df_T_al_ssc.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],4)
+av_swe_df_T_al_ssh.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],5)
+av_swe_df_T_al_ssp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],6)
+av_swe_df_T_al_ljc.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],7)
+av_swe_df_T_al_ljp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],8)
+av_swe_df_T_al_lth.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],9)
+av_swe_df_T_al_sjh.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],10)
+av_swe_df_T_al_sjp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_stp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarSWE',pd.DataFrame(hru_names_dic_swe['stp'][0]),hruid_swe_dic['stp'],['stp'],11)
+av_swe_df_T_al_stp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al = pd.concat([av_swe_df_T_al_lsc,av_swe_df_T_al_lsh,av_swe_df_T_al_lsp,av_swe_df_T_al_ssc,av_swe_df_T_al_ssh,av_swe_df_T_al_ssp,av_swe_df_T_al_ljc,av_swe_df_T_al_ljp,av_swe_df_T_al_lth,av_swe_df_T_al_sjh,av_swe_df_T_al_sjp,av_swe_df_T_al_stp], axis = 1)
 
 av_rPm_df_T_al_lsc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lsc'][0]),hruid_swe_dic['lsc'],['lsc'],0)
 av_rPm_df_T_al_lsh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lsh'][0]),hruid_swe_dic['lsh'],['lsh'],1)
-av_rPm_df_T_al_lsh.drop(['counter'], axis = 1)
+av_rPm_df_T_al_lsh.drop(['counter'], axis = 1, inplace = True)
 av_rPm_df_T_al_lsp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lsp'][0]),hruid_swe_dic['lsp'],['lsp'],2)
-av_rPm_df_T_al_lsp.drop(['counter'], axis = 1)
-av_rPm_df_T_al_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],3)
-av_rPm_df_T_al_ssh.drop(['counter'], axis = 1)
-av_rPm_df_T_al_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],4)
-av_rPm_df_T_al_ssp.drop(['counter'], axis = 1)
-av_rPm_df_T_al_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],5)
-av_rPm_df_T_al_ljc.drop(['counter'], axis = 1)
-av_rPm_df_T_al_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],6)
-av_rPm_df_T_al_ljp.drop(['counter'], axis = 1)
-av_rPm_df_T_al_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],7)
-av_rPm_df_T_al_lth.drop(['counter'], axis = 1)
-av_rPm_df_T_al_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],8)
-av_rPm_df_T_al_sjh.drop(['counter'], axis = 1)
-av_rPm_df_T_al_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],9)
-av_rPm_df_T_al_sjp.drop(['counter'], axis = 1)
-av_rPm_df_T_al = pd.concat([av_rPm_df_T_al_lsc,av_rPm_df_T_al_lsh,av_rPm_df_T_al_lsp,av_rPm_df_T_al_ssh,av_rPm_df_T_al_ssp,av_rPm_df_T_al_ljc,av_rPm_df_T_al_ljp,av_rPm_df_T_al_lth,av_rPm_df_T_al_sjh,av_rPm_df_T_al_sjp], axis = 1)
+av_rPm_df_T_al_lsp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_ssc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssc'][0]),hruid_swe_dic['ssc'],['ssc'],3)
+av_rPm_df_T_al_ssc.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],4)
+av_rPm_df_T_al_ssh.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],5)
+av_rPm_df_T_al_ssp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],6)
+av_rPm_df_T_al_ljc.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],7)
+av_rPm_df_T_al_ljp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],8)
+av_rPm_df_T_al_lth.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],9)
+av_rPm_df_T_al_sjh.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],10)
+av_rPm_df_T_al_sjp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_stp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['stp'][0]),hruid_swe_dic['stp'],['stp'],11)
+av_rPm_df_T_al_stp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al = pd.concat([av_rPm_df_T_al_lsc,av_rPm_df_T_al_lsh,av_rPm_df_T_al_lsp,av_rPm_df_T_al_ssc,av_rPm_df_T_al_ssh,av_rPm_df_T_al_ssp,av_rPm_df_T_al_ljc,av_rPm_df_T_al_ljp,av_rPm_df_T_al_lth,av_rPm_df_T_al_sjh,av_rPm_df_T_al_sjp,av_rPm_df_T_al_stp], axis = 1)
 
 
 #  timing of 50 percent of annual input (melt + rain)
@@ -913,66 +936,78 @@ av_all_T_al_P = readAllNcfilesAsDataset(av_ncfiles_T_al_P)
 # calculating swe, sd, and 50%input
 av_sd_df_T_al_P_lsc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lsc'][0]),hruid_swe_dic['lsc'],['lsc'],0)
 av_sd_df_T_al_P_lsh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lsh'][0]),hruid_swe_dic['lsh'],['lsh'],1)
-av_sd_df_T_al_P_lsh.drop(['counter'], axis = 1)
+av_sd_df_T_al_P_lsh.drop(['counter'], axis = 1, inplace = True)
 av_sd_df_T_al_P_lsp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lsp'][0]),hruid_swe_dic['lsp'],['lsp'],2)
-av_sd_df_T_al_P_lsp.drop(['counter'], axis = 1)
-av_sd_df_T_al_P_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],3)
-av_sd_df_T_al_P_ssh.drop(['counter'], axis = 1)
-av_sd_df_T_al_P_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],4)
-av_sd_df_T_al_P_ssp.drop(['counter'], axis = 1)
-av_sd_df_T_al_P_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],5)
-av_sd_df_T_al_P_ljc.drop(['counter'], axis = 1)
-av_sd_df_T_al_P_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],6)
-av_sd_df_T_al_P_ljp.drop(['counter'], axis = 1)
-av_sd_df_T_al_P_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],7)
-av_sd_df_T_al_P_lth.drop(['counter'], axis = 1)
-av_sd_df_T_al_P_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],8)
-av_sd_df_T_al_P_sjh.drop(['counter'], axis = 1)
-av_sd_df_T_al_P_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],9)
-av_sd_df_T_al_P_sjp.drop(['counter'], axis = 1)
-av_sd_df_T_al_P = pd.concat([av_sd_df_T_al_P_lsc,av_sd_df_T_al_P_lsh,av_sd_df_T_al_P_lsp,av_sd_df_T_al_P_ssh,av_sd_df_T_al_P_ssp,av_sd_df_T_al_P_ljc,av_sd_df_T_al_P_ljp,av_sd_df_T_al_P_lth,av_sd_df_T_al_P_sjh,av_sd_df_T_al_P_sjp], axis = 1)
+av_sd_df_T_al_P_lsp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_P_ssc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssc'][0]),hruid_swe_dic['ssc'],['ssc'],3)
+av_sd_df_T_al_P_ssc.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_P_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],4)
+av_sd_df_T_al_P_ssh.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_P_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],5)
+av_sd_df_T_al_P_ssp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_P_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],6)
+av_sd_df_T_al_P_ljc.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_P_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],7)
+av_sd_df_T_al_P_ljp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_P_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],8)
+av_sd_df_T_al_P_lth.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_P_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],9)
+av_sd_df_T_al_P_sjh.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_P_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],10)
+av_sd_df_T_al_P_sjp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_P_stp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSnowDepth',pd.DataFrame(hru_names_dic_swe['stp'][0]),hruid_swe_dic['stp'],['stp'],11)
+av_sd_df_T_al_P_stp.drop(['counter'], axis = 1, inplace = True)
+av_sd_df_T_al_P = pd.concat([av_sd_df_T_al_P_lsc,av_sd_df_T_al_P_lsh,av_sd_df_T_al_P_lsp,av_sd_df_T_al_P_ssc,av_sd_df_T_al_P_ssh,av_sd_df_T_al_P_ssp,av_sd_df_T_al_P_ljc,av_sd_df_T_al_P_ljp,av_sd_df_T_al_P_lth,av_sd_df_T_al_P_sjh,av_sd_df_T_al_P_sjp,av_sd_df_T_al_P_stp], axis = 1)
 
 av_swe_df_T_al_P_lsc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lsc'][0]),hruid_swe_dic['lsc'],['lsc'],0)
 av_swe_df_T_al_P_lsh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lsh'][0]),hruid_swe_dic['lsh'],['lsh'],1)
-av_swe_df_T_al_P_lsh.drop(['counter'], axis = 1)
+av_swe_df_T_al_P_lsh.drop(['counter'], axis = 1, inplace = True)
 av_swe_df_T_al_P_lsp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lsp'][0]),hruid_swe_dic['lsp'],['lsp'],2)
-av_swe_df_T_al_P_lsp.drop(['counter'], axis = 1)
-av_swe_df_T_al_P_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],3)
-av_swe_df_T_al_P_ssh.drop(['counter'], axis = 1)
-av_swe_df_T_al_P_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],4)
-av_swe_df_T_al_P_ssp.drop(['counter'], axis = 1)
-av_swe_df_T_al_P_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],5)
-av_swe_df_T_al_P_ljc.drop(['counter'], axis = 1)
-av_swe_df_T_al_P_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],6)
-av_swe_df_T_al_P_ljp.drop(['counter'], axis = 1)
-av_swe_df_T_al_P_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],7)
-av_swe_df_T_al_P_lth.drop(['counter'], axis = 1)
-av_swe_df_T_al_P_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],8)
-av_swe_df_T_al_P_sjh.drop(['counter'], axis = 1)
-av_swe_df_T_al_P_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],9)
-av_swe_df_T_al_P_sjp.drop(['counter'], axis = 1)
-av_swe_df_T_al_P = pd.concat([av_swe_df_T_al_P_lsc,av_swe_df_T_al_P_lsh,av_swe_df_T_al_P_lsp,av_swe_df_T_al_P_ssh,av_swe_df_T_al_P_ssp,av_swe_df_T_al_P_ljc,av_swe_df_T_al_P_ljp,av_swe_df_T_al_P_lth,av_swe_df_T_al_P_sjh,av_swe_df_T_al_P_sjp], axis = 1)
+av_swe_df_T_al_P_lsp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_P_ssc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssc'][0]),hruid_swe_dic['ssc'],['ssc'],3)
+av_swe_df_T_al_P_ssc.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_P_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],4)
+av_swe_df_T_al_P_ssh.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_P_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],5)
+av_swe_df_T_al_P_ssp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_P_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],6)
+av_swe_df_T_al_P_ljc.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_P_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],7)
+av_swe_df_T_al_P_ljp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_P_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],8)
+av_swe_df_T_al_P_lth.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_P_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],9)
+av_swe_df_T_al_P_sjh.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_P_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],10)
+av_swe_df_T_al_P_sjp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_P_stp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarSWE',pd.DataFrame(hru_names_dic_swe['stp'][0]),hruid_swe_dic['stp'],['stp'],11)
+av_swe_df_T_al_P_stp.drop(['counter'], axis = 1, inplace = True)
+av_swe_df_T_al_P = pd.concat([av_swe_df_T_al_P_lsc,av_swe_df_T_al_P_lsh,av_swe_df_T_al_P_lsp,av_swe_df_T_al_P_ssc,av_swe_df_T_al_P_ssh,av_swe_df_T_al_P_ssp,av_swe_df_T_al_P_ljc,av_swe_df_T_al_P_ljp,av_swe_df_T_al_P_lth,av_swe_df_T_al_P_sjh,av_swe_df_T_al_P_sjp,av_swe_df_T_al_P_stp], axis = 1)
 
 av_rPm_df_T_al_P_lsc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lsc'][0]),hruid_swe_dic['lsc'],['lsc'],0)
 av_rPm_df_T_al_P_lsh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lsh'][0]),hruid_swe_dic['lsh'],['lsh'],1)
-av_rPm_df_T_al_P_lsh.drop(['counter'], axis = 1)
+av_rPm_df_T_al_P_lsh.drop(['counter'], axis = 1, inplace = True)
 av_rPm_df_T_al_P_lsp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lsp'][0]),hruid_swe_dic['lsp'],['lsp'],2)
-av_rPm_df_T_al_P_lsp.drop(['counter'], axis = 1)
-av_rPm_df_T_al_P_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],3)
-av_rPm_df_T_al_P_ssh.drop(['counter'], axis = 1)
-av_rPm_df_T_al_P_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],4)
-av_rPm_df_T_al_P_ssp.drop(['counter'], axis = 1)
-av_rPm_df_T_al_P_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],5)
-av_rPm_df_T_al_P_ljc.drop(['counter'], axis = 1)
-av_rPm_df_T_al_P_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],6)
-av_rPm_df_T_al_P_ljp.drop(['counter'], axis = 1)
-av_rPm_df_T_al_P_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],7)
-av_rPm_df_T_al_P_lth.drop(['counter'], axis = 1)
-av_rPm_df_T_al_P_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],8)
-av_rPm_df_T_al_P_sjh.drop(['counter'], axis = 1)
-av_rPm_df_T_al_P_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],9)
-av_rPm_df_T_al_P_sjp.drop(['counter'], axis = 1)
-av_rPm_df_T_al_P = pd.concat([av_rPm_df_T_al_P_lsc,av_rPm_df_T_al_P_lsh,av_rPm_df_T_al_P_lsp,av_rPm_df_T_al_P_ssh,av_rPm_df_T_al_P_ssp,av_rPm_df_T_al_P_ljc,av_rPm_df_T_al_P_ljp,av_rPm_df_T_al_P_lth,av_rPm_df_T_al_P_sjh,av_rPm_df_T_al_P_sjp], axis = 1)
+av_rPm_df_T_al_P_lsp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_P_ssc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssc'][0]),hruid_swe_dic['ssc'],['ssc'],3)
+av_rPm_df_T_al_P_ssc.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_P_ssh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssh'][0]),hruid_swe_dic['ssh'],['ssh'],4)
+av_rPm_df_T_al_P_ssh.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_P_ssp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ssp'][0]),hruid_swe_dic['ssp'],['ssp'],5)
+av_rPm_df_T_al_P_ssp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_P_ljc = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljc'][0]),hruid_swe_dic['ljc'],['ljc'],6)
+av_rPm_df_T_al_P_ljc.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_P_ljp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['ljp'][0]),hruid_swe_dic['ljp'],['ljp'],7)
+av_rPm_df_T_al_P_ljp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_P_lth = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['lth'][0]),hruid_swe_dic['lth'],['lth'],8)
+av_rPm_df_T_al_P_lth.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_P_sjh = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjh'][0]),hruid_swe_dic['sjh'],['sjh'],9)
+av_rPm_df_T_al_P_sjh.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_P_sjp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['sjp'][0]),hruid_swe_dic['sjp'],['sjp'],10)
+av_rPm_df_T_al_P_sjp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_P_stp = readVariablefromMultipleNcfilesDatasetasDF2(av_all_T_al_P,'scalarRainPlusMelt',pd.DataFrame(hru_names_dic_swe['stp'][0]),hruid_swe_dic['stp'],['stp'],11)
+av_rPm_df_T_al_P_stp.drop(['counter'], axis = 1, inplace = True)
+av_rPm_df_T_al_P = pd.concat([av_rPm_df_T_al_P_lsc,av_rPm_df_T_al_P_lsh,av_rPm_df_T_al_P_lsp,av_rPm_df_T_al_P_ssc,av_rPm_df_T_al_P_ssh,av_rPm_df_T_al_P_ssp,av_rPm_df_T_al_P_ljc,av_rPm_df_T_al_P_ljp,av_rPm_df_T_al_P_lth,av_rPm_df_T_al_P_sjh,av_rPm_df_T_al_P_sjp,av_rPm_df_T_al_P_stp], axis = 1)
 
 #  timing of 50 percent of annual input (melt + rain)
 time0f50input_T_al_P_dry_df,time0f50input_T_al_P_wet_df = calculatingTiming0f50Pecent0fAnnualInput (av_rPm_df_T_al_P,hru_names_df_swe)
@@ -1013,18 +1048,23 @@ meltingrate_T_al_P_wet_df_mr_sst_cc = meltingrateAvg_T_al_P_wet_df[0][hru_names_
 
 
 #%% plot max swe
-n_groups = 32
-x11 = ['his_wet OF:SWE','T_wet OF:SWE','T_al_wet OF:SWE','T_al_P_wet OF:SWE',
-       'his_dry OF:SWE','T_dry OF:SWE','T_al_dry OF:SWE','T_al_P_dry OF:SWE',
-       
-       'his_wet OF:+MR','T_wet OF:+MR','T_al_wet OF:+MR','T_al_P_wet OF:+MR',
-       'his_dry OF:+MR','T_dry OF:+MR','T_al_dry OF:+MR','T_al_P_dry OF:+MR',
-       
-       'his_wet OF:+SST','T_wet OF:+SST','T_al_wet OF:+SST','T_al_P_wet OF:+SST',
-       'his_dry OF:+SST','T_dry OF:+SST','T_al_dry OF:+SST','T_al_P_dry OF:+SST',
-       
-       'his_wet OF:+CC','T_wet OF:+CC','T_al_wet OF:+CC','T_al_P_wet OF:+CC',
-       'his_dry OF:+CC','T_dry OF:+CC','T_al_dry OF:+CC','T_al_P_dry OF:+CC',
+n_groups = 24
+#x11 = ['his_wet','T_wet','T_al_wet','T_al_P_wet',
+#       'his_dry','T_dry','T_al_dry','T_al_P_dry',
+#       
+#       'his_wet','T_wet','T_al_wet','T_al_P_wet',
+#       'his_dry','T_dry','T_al_dry','T_al_P_dry',
+#       
+##       'his_wet','T_wet','T_al_wet','T_al_P_wet',
+##       'his_dry','T_dry','T_al_dry','T_al_P_dry',
+#       
+#       'his_wet','T_wet','T_al_wet','T_al_P_wet',
+#       'his_dry','T_dry','T_al_dry','T_al_P_dry',
+#       ]
+
+x11 = ['historical','Future Temp','T_al_wet','T_al_P_wet',
+       'his_dry','T_dry','T_al_dry','T_al_P_dry',
+       'his_wet','T_wet','T_al_wet','T_al_P_wet',
        ]
 
 d11 = [maxSWE_df_h_wet[0],maxSWE_df_T_wet[0], 
@@ -1037,10 +1077,10 @@ d11 = [maxSWE_df_h_wet[0],maxSWE_df_T_wet[0],
        maxSWE_h_dry_df_mr,maxSWE_T_dry_df_mr,
        maxSWE_T_al_dry_df_mr,maxSWE_T_al_P_dry_df_mr,
        
-       maxSWE_h_wet_df_mr_sst,maxSWE_T_wet_df_mr_sst,
-       maxSWE_T_al_wet_df_mr_sst,maxSWE_T_al_P_wet_df_mr_sst,
-       maxSWE_h_dry_df_mr_sst,maxSWE_T_dry_df_mr_sst,
-       maxSWE_T_al_dry_df_mr_sst,maxSWE_T_al_P_dry_df_mr_sst,
+#       maxSWE_h_wet_df_mr_sst,maxSWE_T_wet_df_mr_sst,
+#       maxSWE_T_al_wet_df_mr_sst,maxSWE_T_al_P_wet_df_mr_sst,
+#       maxSWE_h_dry_df_mr_sst,maxSWE_T_dry_df_mr_sst,
+#       maxSWE_T_al_dry_df_mr_sst,maxSWE_T_al_P_dry_df_mr_sst,
        
        maxSWE_h_wet_df_mr_sst_cc,maxSWE_T_wet_df_mr_sst_cc,
        maxSWE_T_al_wet_df_mr_sst_cc,maxSWE_T_al_P_wet_df_mr_sst_cc,
@@ -1051,8 +1091,8 @@ d11 = [maxSWE_df_h_wet[0],maxSWE_df_T_wet[0],
 index = np.arange(n_groups)
 bar_width = 0.5
 
-safig, saax = plt.subplots(1,1, figsize=(160,40))#
-position = [1,2,3,4,5,6,7,8, 11,12,13,14,15,16,17,18, 21,22,23,24,25,26,27,28, 32,33,34,35,36,37,38,39]
+safig, saax = plt.subplots(1,1, figsize=(120,40))#
+position = [1,2,3,4,5,6,7,8, 11,12,13,14,15,16,17,18, 21,22,23,24,25,26,27,28]#, 32,33,34,35,36,37,38,39
 bp3 = saax.boxplot(d11, patch_artist=True, positions = position, capprops = {'linewidth':5.0},
                    flierprops = dict(marker='o', markersize=16, linestyle='none', markeredgecolor='k'),
                    whiskerprops = {'linewidth':5.0})
@@ -1084,19 +1124,21 @@ bp3['boxes'][21].set(linewidth=8, facecolor = 'lightcyan', hatch = 'o')
 bp3['boxes'][22].set(linewidth=8, facecolor = 'lightcyan', hatch = 'o')
 bp3['boxes'][23].set(linewidth=8, facecolor = 'lightcyan', hatch = 'o')
 
-bp3['boxes'][24].set(linewidth=8, facecolor = 'deepskyblue', hatch = '\\')
-bp3['boxes'][25].set(linewidth=8, facecolor = 'deepskyblue', hatch = '\\')
-bp3['boxes'][26].set(linewidth=8, facecolor = 'deepskyblue', hatch = '\\')
-bp3['boxes'][27].set(linewidth=8, facecolor = 'deepskyblue', hatch = '\\')
-bp3['boxes'][28].set(linewidth=8, facecolor = 'lightcyan', hatch = '\\')
-bp3['boxes'][29].set(linewidth=8, facecolor = 'lightcyan', hatch = '\\')
-bp3['boxes'][30].set(linewidth=8, facecolor = 'lightcyan', hatch = '\\')
-bp3['boxes'][31].set(linewidth=8, facecolor = 'lightcyan', hatch = '\\')
+#bp3['boxes'][24].set(linewidth=8, facecolor = 'deepskyblue', hatch = '\\')
+#bp3['boxes'][25].set(linewidth=8, facecolor = 'deepskyblue', hatch = '\\')
+#bp3['boxes'][26].set(linewidth=8, facecolor = 'deepskyblue', hatch = '\\')
+#bp3['boxes'][27].set(linewidth=8, facecolor = 'deepskyblue', hatch = '\\')
+#bp3['boxes'][28].set(linewidth=8, facecolor = 'lightcyan', hatch = '\\')
+#bp3['boxes'][29].set(linewidth=8, facecolor = 'lightcyan', hatch = '\\')
+#bp3['boxes'][30].set(linewidth=8, facecolor = 'lightcyan', hatch = '\\')
+#bp3['boxes'][31].set(linewidth=8, facecolor = 'lightcyan', hatch = '\\')
 
 plt.ylabel('max SWE (mm)', fontsize=80)
 plt.yticks(fontsize=80)
 plt.xticks(position,x11, fontsize=60, rotation = '25')
-plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/sa_cc_swe_swe_mr_sst_cc7.png')
+plt.title('OF: maxSWE                                                             OF: maxSWE + meltRate                                            OF: maxSWE+meltRate+coldContent', fontsize=90, loc='center')
+
+plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/sa_cc_swe_swe_mr_sst_cc_all2.png')
 
 
 #%% plot dosd
@@ -1110,10 +1152,10 @@ d12 = [((dosd_df_h_wet.T-8737)/24.-30.)[0],((dosd_df_T_wet.T-8737)/24.-30.)[0],
        (dosd_h_dry_df_mr.T/24.-30.)[0],(dosd_T_dry_df_mr.T/24.-30.)[0],
        (dosd_T_al_dry_df_mr.T/24.-30.)[0],(dosd_T_al_P_dry_df_mr.T/24.-30.)[0],
        
-       ((dosd_h_wet_df_mr_sst.T-8737)/24.-30.)[0],((dosd_T_wet_df_mr_sst.T-8737)/24.-30.)[0],
-       ((dosd_T_al_wet_df_mr_sst.T-8737)/24.-30.)[0],((dosd_T_al_P_wet_df_mr_sst.T-8737)/24.-30.)[0],
-       (dosd_h_dry_df_mr_sst.T/24.-30.)[0],(dosd_T_dry_df_mr_sst.T/24.-30.)[0],
-       (dosd_T_al_dry_df_mr_sst.T/24.-30.)[0],(dosd_T_al_P_dry_df_mr_sst.T/24.-30.)[0],
+#       ((dosd_h_wet_df_mr_sst.T-8737)/24.-30.)[0],((dosd_T_wet_df_mr_sst.T-8737)/24.-30.)[0],
+#       ((dosd_T_al_wet_df_mr_sst.T-8737)/24.-30.)[0],((dosd_T_al_P_wet_df_mr_sst.T-8737)/24.-30.)[0],
+#       (dosd_h_dry_df_mr_sst.T/24.-30.)[0],(dosd_T_dry_df_mr_sst.T/24.-30.)[0],
+#       (dosd_T_al_dry_df_mr_sst.T/24.-30.)[0],(dosd_T_al_P_dry_df_mr_sst.T/24.-30.)[0],
        
        ((dosd_h_wet_df_mr_sst_cc.T-8737)/24.-30.)[0],((dosd_T_wet_df_mr_sst_cc.T-8737)/24.-30.)[0],
        ((dosd_T_al_wet_df_mr_sst_cc.T-8737)/24.-30.)[0],((dosd_T_al_P_wet_df_mr_sst_cc.T-8737)/24.-30.)[0],
@@ -1122,8 +1164,7 @@ d12 = [((dosd_df_h_wet.T-8737)/24.-30.)[0],((dosd_df_T_wet.T-8737)/24.-30.)[0],
        
        ]
 
-safig2, saax2 = plt.subplots(1,1, figsize=(160,40))#
-position = [1,2,3,4,5,6,7,8, 11,12,13,14,15,16,17,18, 21,22,23,24,25,26,27,28, 32,33,34,35,36,37,38,39]
+safig2, saax2 = plt.subplots(1,1, figsize=(120,40))#
 bp4 = saax2.boxplot(d12, patch_artist=True, positions = position, capprops = {'linewidth':5.0},
                     flierprops = dict(marker='o', markersize=16, linestyle='none', markeredgecolor='k'),
                     whiskerprops = {'linewidth':5.0})
@@ -1155,19 +1196,21 @@ bp4['boxes'][21].set(linewidth=8, facecolor = 'salmon', hatch = 'o')
 bp4['boxes'][22].set(linewidth=8, facecolor = 'salmon', hatch = 'o')
 bp4['boxes'][23].set(linewidth=8, facecolor = 'salmon', hatch = 'o')
 
-bp4['boxes'][24].set(linewidth=8, facecolor = 'mistyrose', hatch = '\\')
-bp4['boxes'][25].set(linewidth=8, facecolor = 'mistyrose', hatch = '\\')
-bp4['boxes'][26].set(linewidth=8, facecolor = 'mistyrose', hatch = '\\')
-bp4['boxes'][27].set(linewidth=8, facecolor = 'mistyrose', hatch = '\\')
-bp4['boxes'][28].set(linewidth=8, facecolor = 'salmon', hatch = '\\')
-bp4['boxes'][29].set(linewidth=8, facecolor = 'salmon', hatch = '\\')
-bp4['boxes'][30].set(linewidth=8, facecolor = 'salmon', hatch = '\\')
-bp4['boxes'][31].set(linewidth=8, facecolor = 'salmon', hatch = '\\')
+#bp4['boxes'][24].set(linewidth=8, facecolor = 'mistyrose', hatch = '\\')
+#bp4['boxes'][25].set(linewidth=8, facecolor = 'mistyrose', hatch = '\\')
+#bp4['boxes'][26].set(linewidth=8, facecolor = 'mistyrose', hatch = '\\')
+#bp4['boxes'][27].set(linewidth=8, facecolor = 'mistyrose', hatch = '\\')
+#bp4['boxes'][28].set(linewidth=8, facecolor = 'salmon', hatch = '\\')
+#bp4['boxes'][29].set(linewidth=8, facecolor = 'salmon', hatch = '\\')
+#bp4['boxes'][30].set(linewidth=8, facecolor = 'salmon', hatch = '\\')
+#bp4['boxes'][31].set(linewidth=8, facecolor = 'salmon', hatch = '\\')
 
 plt.ylabel('day of snow disappearance (day of the water year)', fontsize=80)
 plt.yticks(fontsize=80)
 plt.xticks(position,x11, fontsize=60, rotation = '25')
-plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/sa_cc_dosd_swe_mr_sst_cc7.png')
+plt.title('OF: maxSWE                                                             OF: maxSWE + meltRate                                            OF: maxSWE+meltRate+coldContent', fontsize=90, loc='center')
+
+plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/sa_cc_dosd_swe_mr_sst_cc_all2.png')
 
 #%% timing of 50 input
 d13 = [((time0f50input_h_wet_df)/24.)[0],((time0f50input_T_wet_df)/24.)[0],
@@ -1180,10 +1223,10 @@ d13 = [((time0f50input_h_wet_df)/24.)[0],((time0f50input_T_wet_df)/24.)[0],
        (time0f50input_h_dry_df_mr/24.),(time0f50input_T_dry_df_mr/24.),
        (time0f50input_T_al_dry_df_mr/24.),(time0f50input_T_al_P_dry_df_mr/24.),
        
-       ((time0f50input_h_wet_df_mr_sst)/24.),((time0f50input_T_wet_df_mr_sst)/24.),
-       ((time0f50input_T_al_wet_df_mr_sst)/24.),((time0f50input_T_al_P_wet_df_mr_sst)/24.),
-       (time0f50input_h_dry_df_mr_sst/24.),(time0f50input_T_dry_df_mr_sst/24.),
-       (time0f50input_T_al_dry_df_mr_sst/24.),(time0f50input_T_al_P_dry_df_mr_sst/24.),
+#       ((time0f50input_h_wet_df_mr_sst)/24.),((time0f50input_T_wet_df_mr_sst)/24.),
+#       ((time0f50input_T_al_wet_df_mr_sst)/24.),((time0f50input_T_al_P_wet_df_mr_sst)/24.),
+#       (time0f50input_h_dry_df_mr_sst/24.),(time0f50input_T_dry_df_mr_sst/24.),
+#       (time0f50input_T_al_dry_df_mr_sst/24.),(time0f50input_T_al_P_dry_df_mr_sst/24.),
        
        ((time0f50input_h_wet_df_mr_sst_cc)/24.),((time0f50input_T_wet_df_mr_sst_cc)/24.),
        ((time0f50input_T_al_wet_df_mr_sst_cc)/24.),((time0f50input_T_al_P_wet_df_mr_sst_cc)/24.),
@@ -1191,7 +1234,7 @@ d13 = [((time0f50input_h_wet_df)/24.)[0],((time0f50input_T_wet_df)/24.)[0],
        (time0f50input_T_al_dry_df_mr_sst_cc/24.),(time0f50input_T_al_P_dry_df_mr_sst_cc/24.),
        ]
 
-safig3, saax3 = plt.subplots(1,1, figsize=(160,40))#
+safig3, saax3 = plt.subplots(1,1, figsize=(120,40))#
 bp5 = saax3.boxplot(d13, patch_artist=True, positions = position, capprops = {'linewidth':5.0},
                     flierprops = dict(marker='o', markersize=16, linestyle='none', markeredgecolor='k'),
                     whiskerprops = {'linewidth':5.0})
@@ -1223,19 +1266,21 @@ bp5['boxes'][21].set(linewidth=8, facecolor = 'lightgreen', hatch = 'o')
 bp5['boxes'][22].set(linewidth=8, facecolor = 'lightgreen', hatch = 'o')
 bp5['boxes'][23].set(linewidth=8, facecolor = 'lightgreen', hatch = 'o')
 
-bp5['boxes'][24].set(linewidth=8, facecolor = 'green', hatch = '\\')
-bp5['boxes'][25].set(linewidth=8, facecolor = 'green', hatch = '\\')
-bp5['boxes'][26].set(linewidth=8, facecolor = 'green', hatch = '\\')
-bp5['boxes'][27].set(linewidth=8, facecolor = 'green', hatch = '\\')
-bp5['boxes'][28].set(linewidth=8, facecolor = 'lightgreen', hatch = '\\')
-bp5['boxes'][29].set(linewidth=8, facecolor = 'lightgreen', hatch = '\\')
-bp5['boxes'][30].set(linewidth=8, facecolor = 'lightgreen', hatch = '\\')
-bp5['boxes'][31].set(linewidth=8, facecolor = 'lightgreen', hatch = '\\')
+#bp5['boxes'][24].set(linewidth=8, facecolor = 'green', hatch = '\\')
+#bp5['boxes'][25].set(linewidth=8, facecolor = 'green', hatch = '\\')
+#bp5['boxes'][26].set(linewidth=8, facecolor = 'green', hatch = '\\')
+#bp5['boxes'][27].set(linewidth=8, facecolor = 'green', hatch = '\\')
+#bp5['boxes'][28].set(linewidth=8, facecolor = 'lightgreen', hatch = '\\')
+#bp5['boxes'][29].set(linewidth=8, facecolor = 'lightgreen', hatch = '\\')
+#bp5['boxes'][30].set(linewidth=8, facecolor = 'lightgreen', hatch = '\\')
+#bp5['boxes'][31].set(linewidth=8, facecolor = 'lightgreen', hatch = '\\')
 
 plt.ylabel('timing of 50% input (rain + melt) from Sep 1st (day)', fontsize=80)
 plt.yticks(fontsize=80)
 plt.xticks(position,x11, fontsize=60, rotation = '25')
-plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/sa_cc_time0f50input_swe_mr_sst_cc7.png')
+plt.title('OF: maxSWE                                                             OF: maxSWE + meltRate                                            OF: maxSWE+meltRate+coldContent', fontsize=90, loc='center')
+
+plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/sa_cc_time0f50input_swe_mr_sst_cc_all2.png')
 
 
 #%% timing of 50 input
@@ -1249,10 +1294,10 @@ d14 = [meltingrateAvg_h_wet_df[0],meltingrateAvg_T_wet_df[0],
        meltingrate_h_dry_df_mr,meltingrate_T_dry_df_mr,
        meltingrate_T_al_dry_df_mr,meltingrate_T_al_P_dry_df_mr,
        
-       meltingrate_h_wet_df_mr_sst,meltingrate_T_wet_df_mr_sst,
-       meltingrate_T_al_wet_df_mr_sst,meltingrate_T_al_P_wet_df_mr_sst,
-       meltingrate_h_dry_df_mr_sst,meltingrate_T_dry_df_mr_sst,
-       meltingrate_T_al_dry_df_mr_sst,meltingrate_T_al_P_dry_df_mr_sst,
+#       meltingrate_h_wet_df_mr_sst,meltingrate_T_wet_df_mr_sst,
+#       meltingrate_T_al_wet_df_mr_sst,meltingrate_T_al_P_wet_df_mr_sst,
+#       meltingrate_h_dry_df_mr_sst,meltingrate_T_dry_df_mr_sst,
+#       meltingrate_T_al_dry_df_mr_sst,meltingrate_T_al_P_dry_df_mr_sst,
        
        meltingrate_h_wet_df_mr_sst_cc,meltingrate_T_wet_df_mr_sst_cc,
        meltingrate_T_al_wet_df_mr_sst_cc,meltingrate_T_al_P_wet_df_mr_sst_cc,
@@ -1260,7 +1305,7 @@ d14 = [meltingrateAvg_h_wet_df[0],meltingrateAvg_T_wet_df[0],
        meltingrate_T_al_dry_df_mr_sst_cc,meltingrate_T_al_P_dry_df_mr_sst_cc,
        ]
 
-safig4, saax4 = plt.subplots(1,1, figsize=(160,40))#
+safig4, saax4 = plt.subplots(1,1, figsize=(120,40))#
 bp6 = saax4.boxplot(d14, patch_artist=True, positions = position, capprops = {'linewidth':5.0},
                     flierprops = dict(marker='o', markersize=16, linestyle='none', markeredgecolor='k'),
                     whiskerprops = {'linewidth':5.0})
@@ -1292,19 +1337,21 @@ bp6['boxes'][21].set(linewidth=8, facecolor = 'pink', hatch = 'o')
 bp6['boxes'][22].set(linewidth=8, facecolor = 'pink', hatch = 'o')
 bp6['boxes'][23].set(linewidth=8, facecolor = 'pink', hatch = 'o')
 
-bp6['boxes'][24].set(linewidth=8, facecolor = 'orchid', hatch = '\\')
-bp6['boxes'][25].set(linewidth=8, facecolor = 'orchid', hatch = '\\')
-bp6['boxes'][26].set(linewidth=8, facecolor = 'orchid', hatch = '\\')
-bp6['boxes'][27].set(linewidth=8, facecolor = 'orchid', hatch = '\\')
-bp6['boxes'][28].set(linewidth=8, facecolor = 'pink', hatch = '\\')
-bp6['boxes'][29].set(linewidth=8, facecolor = 'pink', hatch = '\\')
-bp6['boxes'][30].set(linewidth=8, facecolor = 'pink', hatch = '\\')
-bp6['boxes'][31].set(linewidth=8, facecolor = 'pink', hatch = '\\')
+#bp6['boxes'][24].set(linewidth=8, facecolor = 'orchid', hatch = '\\')
+#bp6['boxes'][25].set(linewidth=8, facecolor = 'orchid', hatch = '\\')
+#bp6['boxes'][26].set(linewidth=8, facecolor = 'orchid', hatch = '\\')
+#bp6['boxes'][27].set(linewidth=8, facecolor = 'orchid', hatch = '\\')
+#bp6['boxes'][28].set(linewidth=8, facecolor = 'pink', hatch = '\\')
+#bp6['boxes'][29].set(linewidth=8, facecolor = 'pink', hatch = '\\')
+#bp6['boxes'][30].set(linewidth=8, facecolor = 'pink', hatch = '\\')
+#bp6['boxes'][31].set(linewidth=8, facecolor = 'pink', hatch = '\\')
 
 plt.ylabel('melting rate (cm/day)', fontsize=80)
 plt.yticks(fontsize=80)
 plt.xticks(position,x11, fontsize=60, rotation = '25')
-plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/sa_cc_meltingrate_swe_mr_sst_cc7.png')
+plt.title('OF: maxSWE                                                             OF: maxSWE + meltRate                                            OF: maxSWE+meltRate+coldContent', fontsize=90, loc='center')
+
+plt.savefig('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/sa_cc_meltingrate_swe_mr_sst_cc_all2.png')
 
 #%%  #cm/day melting rate calcullation based on observation data
 sweMR = [711, 550, 309, 84]

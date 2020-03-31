@@ -67,28 +67,25 @@ with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/c
     reader1 = csv.reader(sapr)
     params2 = [r1 for r1 in reader1]
 params_index = np.array(params2[1:])
-params_index_df = pd.DataFrame(params_index, columns = ['lsh','lsp','lsc','ssh','ssp','ssc',
-                                                        'ljp','ljc','lth','sjh','sjp','stp'])
+params_index_df = pd.DataFrame(params_index, columns = ['lsc','lsh','lsp','ssc','ssh','ssp',
+                                                        'ljc','ljp','lth','sjh','sjp','stp'])
 
 #lsh453  lsp441	lsc457	ssh405	ssp412	ssc401	ljp190	ljc290	lth121	sjh162	sjp182	stp116
-hruid_dic = {'lsh': [], 'lsp': [], 'lsc': [], 'ssh': [], 'ssp': [], 
-             'ssc': [], 'ljp': [], 'ljc': [], 'lth': [], 'sjh': [],
-             'sjp': [], 'stp': []}
+hruid_dic = {'lsc': [], 'lsh': [], 'lsp': [],  'ssc': [], 'ssh': [], 'ssp': [], 
+             'ljc': [], 'ljp': [],  'lth': [], 'sjh': [], 'sjp': [], 'stp': []}
 for keys in params_index_df.columns:
     for counter in range (len(params_index_df)):
         if int(params_index_df[keys][counter])>0:
             hruid_dic[keys].append(int(params_index_df[keys][counter]))
 
-index_dic = {'lsh': [], 'lsp': [], 'lsc': [], 'ssh': [], 'ssp': [], 
-             'ssc': [], 'ljp': [], 'ljc': [], 'lth': [], 'sjh': [],
-             'sjp': [], 'stp': []}
+index_dic = {'lsc': [], 'lsh': [], 'lsp': [],  'ssc': [], 'ssh': [], 'ssp': [], 
+             'ljc': [], 'ljp': [],  'lth': [], 'sjh': [], 'sjp': [], 'stp': []}
 for indx in params_index_df.columns:
     index_array = np.array(hruid_dic[indx])-10000
     index_dic[indx].append(index_array)
 
-param_dic = {'lsh': [], 'lsp': [], 'lsc': [], 'ssh': [], 'ssp': [], 
-             'ssc': [], 'ljp': [], 'ljc': [], 'lth': [], 'sjh': [],
-             'sjp': [], 'stp': []}
+param_dic = {'lsc': [], 'lsh': [], 'lsp': [],  'ssc': [], 'ssh': [], 'ssp': [], 
+             'ljc': [], 'ljp': [],  'lth': [], 'sjh': [], 'sjp': [], 'stp': []}
 for prms in params_index_df.columns:
     if prms[1]=='s':
         params00 = params_sa_df13p.iloc[index_dic[prms][0]]
@@ -97,8 +94,8 @@ for prms in params_index_df.columns:
         params00 = params_sa_df12p.iloc[index_dic[prms][0]]
         param_dic[prms].append(params00)
         
-params_sa = param_dic['ssc'][0].values #['lsh','lsp','lsc','ssh','ssp','ssc','ljp','ljc','sjh','lth','sjp','stp']
-hruidxID = hruid_dic['ssc']
+params_sa = param_dic['lsc'][0].values #['lsh','lsp','lsc','ssh','ssp','ssc','ljp','ljc','sjh','lth','sjp','stp']
+hruidxID = hruid_dic['lsc']
 hru_num = np.size(hruidxID)
 
 #%% #create new paramtrail.nc file and adding vaiables to it --- summa_zParamTrial_variableDecayRate_test
@@ -152,15 +149,15 @@ print (paramfile.variables['frozenPrecipMultip'][:])
 aaa = paramfile.variables['LAIMIN'][:]
 paramfile.close()
 #%% 
-#varcheck = Dataset ('C:/Users/HHS/summaTestCases_2.x/settings/swampAngel/sa_sa2_vars/summa_zParamTrial_variableDecayRate_sa_sa2.nc')#C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/
-##print varcheck.variables['fixedThermalCond_snow'][:]
-##print np.size(varcheck.variables['fixedThermalCond_snow'][:])
-#
-#for varname in varcheck.variables.keys():
-#    var = paramfile.variables[varname]
-#    print varname, var.dtype, var.dimensions, var.shape
-#
-#print varcheck.variables['frozenPrecipMultip'][:]
+varcheck = Dataset ('C:/Users/HHS/summaTestCases_2.x/settings/swampAngel/validation/summa_zParamTrial_variableDecayRate_sa_lsc.nc')#C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/
+#print varcheck.variables['fixedThermalCond_snow'][:]
+#print np.size(varcheck.variables['fixedThermalCond_snow'][:])
+
+for varname in varcheck.variables.keys():
+    var = varcheck.variables[varname]
+    print varname, var.dtype, var.dimensions, var.shape
+
+#print varcheck.variables['hruIndex'][:]
 #I checked it in Check.py code
 #%% # local attributes file
 # create a new localAtribute file ---- summa_zLocalAttributes_swampAngel_vtest

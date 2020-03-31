@@ -39,7 +39,7 @@ def param_fill(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15,
     return(p1l, p2l, p3l, p4l, p5l, p6l, p7l, p8l, p9l, p10l, p11l, p12l, p13l, p14l, p15l, p16l, p17l)# , p18l 
 
 #%%  all parameters
-with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/STAR_out_P12_233_L.csv") as safd:
+with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/snow_rain_sep/STAR_out_P12_233_L.csv") as safd:
     reader = csv.reader(safd)
     params0 = [r for r in reader]
 params1 = params0[1:]
@@ -50,7 +50,7 @@ for csv_counter1 in range (len (params1)):
 params_sa0=np.reshape(sa_fd_column,(len (params1),21))
 params_sa_df12p = pd.DataFrame(params_sa0)#,columns = params0[0]
 
-with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/STAR_out_P13_233_L.csv") as safd3:
+with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/snow_rain_sep/STAR_out_P13_233_L.csv") as safd3:
     reader3 = csv.reader(safd3)
     params03 = [r3 for r3 in reader3]
 params13 = params03[1:]
@@ -63,32 +63,29 @@ params_sa_df13p = pd.DataFrame(params_sa03)#,columns = params0[0]
 
 
 # reading index of best parameters for each decision model combination 
-with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/p1213_sweBestParam_index.csv") as sapr:
+with open("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/snow_rain_sep/p1213_sweBestParam_index.csv") as sapr:
     reader1 = csv.reader(sapr)
     params2 = [r1 for r1 in reader1]
 params_index = np.array(params2[1:])
-params_index_df = pd.DataFrame(params_index, columns = ['lsh','lsp','lsc','ssh','ssp','ssc',
-                                                        'ljp','ljc','lth','sjh','sjp','stp'])
+params_index_df = pd.DataFrame(params_index, columns = ['lsc','lsh','lsp','ssc','ssh','ssp',
+                                                        'ljc','ljp','lth','sjh','sjp','stp'])
 
 #lsh453  lsp441	lsc457	ssh405	ssp412	ssc401	ljp190	ljc290	lth121	sjh162	sjp182	stp116
-hruid_dic = {'lsh': [], 'lsp': [], 'lsc': [], 'ssh': [], 'ssp': [], 
-             'ssc': [], 'ljp': [], 'ljc': [], 'lth': [], 'sjh': [],
-             'sjp': [], 'stp': []}
+hruid_dic = {'lsc': [], 'lsh': [], 'lsp': [],  'ssc': [], 'ssh': [], 'ssp': [], 
+             'ljc': [], 'ljp': [],  'lth': [], 'sjh': [], 'sjp': [], 'stp': []}
 for keys in params_index_df.columns:
     for counter in range (len(params_index_df)):
         if int(params_index_df[keys][counter])>0:
             hruid_dic[keys].append(int(params_index_df[keys][counter]))
 
-index_dic = {'lsh': [], 'lsp': [], 'lsc': [], 'ssh': [], 'ssp': [], 
-             'ssc': [], 'ljp': [], 'ljc': [], 'lth': [], 'sjh': [],
-             'sjp': [], 'stp': []}
+index_dic = {'lsc': [], 'lsh': [], 'lsp': [],  'ssc': [], 'ssh': [], 'ssp': [], 
+             'ljc': [], 'ljp': [],  'lth': [], 'sjh': [], 'sjp': [], 'stp': []}
 for indx in params_index_df.columns:
     index_array = np.array(hruid_dic[indx])-10000
     index_dic[indx].append(index_array)
 
-param_dic = {'lsh': [], 'lsp': [], 'lsc': [], 'ssh': [], 'ssp': [], 
-             'ssc': [], 'ljp': [], 'ljc': [], 'lth': [], 'sjh': [],
-             'sjp': [], 'stp': []}
+param_dic = {'lsc': [], 'lsh': [], 'lsp': [],  'ssc': [], 'ssh': [], 'ssp': [], 
+             'ljc': [], 'ljp': [],  'lth': [], 'sjh': [], 'sjp': [], 'stp': []}
 for prms in params_index_df.columns:
     if prms[1]=='s':
         params00 = params_sa_df13p.iloc[index_dic[prms][0]]
@@ -97,12 +94,12 @@ for prms in params_index_df.columns:
         params00 = params_sa_df12p.iloc[index_dic[prms][0]]
         param_dic[prms].append(params00)
         
-params_sa = param_dic['ssc'][0].values #['lsh','lsp','lsc','ssh','ssp','ssc','ljp','ljc','sjh','lth','sjp','stp']
-hruidxID = hruid_dic['ssc']
+params_sa = param_dic['ljc'][0].values #['lsh','lsp','lsc','ssh','ssp','ssc','ljp','ljc','sjh','lth','sjp','stp']
+hruidxID = hruid_dic['ljc']
 hru_num = np.size(hruidxID)
 
 #%% #create new paramtrail.nc file and adding vaiables to it --- summa_zParamTrial_variableDecayRate_test
-paramfile = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/summa_zParamTrial_variableDecayRate_sa_stp.nc",'w',format='NETCDF3_CLASSIC') #create new paramtrail.nc file
+paramfile = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/snow_rain_sep/summa_zParamTrial_variableDecayRate_sa_ljc.nc",'w',format='NETCDF3_CLASSIC') #create new paramtrail.nc file
 
 hru = paramfile.createDimension('hru', None)
 hidx = paramfile.createVariable('hruIndex', np.float64,('hru',)) # add hruIndex variable
@@ -152,19 +149,19 @@ print (paramfile.variables['frozenPrecipMultip'][:])
 aaa = paramfile.variables['LAIMIN'][:]
 paramfile.close()
 #%% 
-#varcheck = Dataset ('C:/Users/HHS/summaTestCases_2.x/settings/swampAngel/sa_sa2_vars/summa_zParamTrial_variableDecayRate_sa_sa2.nc')#C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/
-##print varcheck.variables['fixedThermalCond_snow'][:]
-##print np.size(varcheck.variables['fixedThermalCond_snow'][:])
-#
-#for varname in varcheck.variables.keys():
-#    var = paramfile.variables[varname]
-#    print varname, var.dtype, var.dimensions, var.shape
-#
-#print varcheck.variables['frozenPrecipMultip'][:]
+varcheck = Dataset ('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/snow_rain_sep/summa_zParamTrial_variableDecayRate_sa_ljc.nc')#C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/sa_sa2_vars/sa_sa2_VARs_p12FPM_fTCs/
+#print varcheck.variables['fixedThermalCond_snow'][:]
+#print np.size(varcheck.variables['fixedThermalCond_snow'][:])
+
+for varname in varcheck.variables.keys():
+    var = varcheck.variables[varname]
+    print varname, var.dtype, var.dimensions, var.shape
+
+#print varcheck.variables['hruIndex'][:]
 #I checked it in Check.py code
 #%% # local attributes file
 # create a new localAtribute file ---- summa_zLocalAttributes_swampAngel_vtest
-local_atrbt = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/summa_zLocalAttributes_swampAngel_stp.nc",'w',format='NETCDF3_CLASSIC')
+local_atrbt = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/snow_rain_sep/summa_zLocalAttributes_swampAngel_ljc.nc",'w',format='NETCDF3_CLASSIC')
 # define dimensions 
 hru = local_atrbt.createDimension('hru', hru_num) 
 time = local_atrbt.createDimension('gru', 1)
@@ -219,7 +216,7 @@ local_atrbt.variables['mHeight'][:] = c4
 
 local_atrbt.close()
 #%%
-lacheck = Dataset('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/summa_zLocalAttributes_swampAngel_stp.nc')
+lacheck = Dataset('C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/snow_rain_sep/summa_zLocalAttributes_swampAngel_ljc.nc')
 
 print lacheck.variables['mHeight'][:]
 #for j in laCheck.variables:
@@ -230,7 +227,7 @@ for varname in lacheck.variables.keys():
 #lacheck.close()
 #%% # initial conditions file. summa_zInitialCond_vtest
 
-in_condi = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/summa_zInitialCond_stp.nc",'w',format='NETCDF3_CLASSIC')
+in_condi = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/snow_rain_sep/summa_zInitialCond_ljc.nc",'w',format='NETCDF3_CLASSIC')
 #print ic.variables.keys()
 
 # define dimensions 
@@ -271,7 +268,7 @@ print in_condi.variables['nSnow'][:]
 
 in_condi.close()
 #%%
-iccheck = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/cc_wrf_swe/summa_zInitialCond_stp.nc")
+iccheck = Dataset("C:/1UNRuniversityFolder/Dissertation/Chapter 1-Snowmelt/swamp_angel/snow_rain_sep/summa_zInitialCond_ljc.nc")
 #for varname in iccheck.variables.keys():
 #    var = iccheck.variables[varname]
 #    print (varname, var.dtype, var.dimensions, var.shape)
